@@ -140,6 +140,8 @@ static struct { float afterMs, afterBudgetMs, tailMs, tailExpectedMs; } sStats;
 static bool sReady, sViewReady, sCrossingSoon;
 static uint64_t sAfterEndTick;
 static float sTailMs;
+/* CtrVoxel_SetFrameReserve owns this in production; keep its zero default. */
+static float sFrameReserveMs;
 static unsigned sAheadBackoff, postStarts;
 static float sLastBuildMs, sInFrameBuildMs;
 typedef struct { float cpuMs, gpuMs, gpuStartMs; bool voxelFrame; } CtrVideoStats;
