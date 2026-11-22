@@ -14,6 +14,8 @@ Where every part of Emerald 3DS comes from, and what ships where.
 | Recipe (`emerald3ds.recipe`) | generated from a build | offsets, sizes, CRCs, engine pointers | no | yes |
 | Precompiled voxel programs (in the recipe, op `V`) | the voxel generators' outputs, precompiled at release time | the port's geometry, heights, placements, shapes and masks; the game's texels and pixels only as references (tile, row, column, palette) into the player's ROM - see `docs/VOXEL_PRECOMPILE.md` | no | yes |
 | Builder (`builder/`) | Emerald 3DS | `LICENSE-PORT.md` | yes | standalone executable |
+| Android launcher icons (`android_port/app/res/drawable-xxxhdpi`, `mipmap-*`) | `3ds_port/assets/artwork/icon.png`, generated with `android_port/tools/make_icon.py` | Original icon by the Emerald 3DS author; `LICENSE-PORT.md` for the port artwork | generated PNG files and generator | packaged in the Android APK |
+| Android low-address allocator (`android_port/third_party/dlmalloc/malloc.c`) | Doug Lea, dlmalloc 2.8.6 (2012-08-29); source copy from Boost.Container 1.92.0 `libs/container/src/dlmalloc_2_8_6.c` | public domain / CC0 1.0 as stated in the unmodified source header; see `android_port/third_party/dlmalloc/LICENSE` | yes | linked into the arm64 Android library |
 | libctru, citro2d, citro3d | devkitPro | zlib | no | linked |
 | Python, Tk, Pillow, PyInstaller runtime | their projects | PSF / BSD / HPND / GPL+exception | no | inside the builder |
 
