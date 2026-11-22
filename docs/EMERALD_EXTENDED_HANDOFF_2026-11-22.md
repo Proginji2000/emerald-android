@@ -115,3 +115,24 @@
 **Interdits conservés :** aucune ROM, sauvegarde ou donnée personnelle dans GitHub ;
 aucune modification de `main` sans qualification ; aucune désactivation de l'audit ;
 aucun écrasement de l'application stable.
+
+## 7. Branche intégrée de prévisualisation (sans merge sur main)
+
+- **Branche :** `integration/ayn-thor-preview-20261122`
+- **Commit :** `a075c2c51a6f2f1241baccb94de46ad31bb43779`
+- **Base :** `feat/map-display-mode-20261122` au commit `4e1fc36d`.
+- **Contenu :** PR #1 (marqueurs carte), PR #5 (mode CLASSIQUE/PROGRESSIVE),
+  PR #4 (VITESSE COMBAT et libellé FR), PR #3 (attributions et licence).
+  Les deux fichiers d'options ont été fusionnés sans écraser la ligne `map_progressive`.
+- **CI push :** https://github.com/Proginji2000/emerald-android/actions/runs/45051243446 .
+  Lancement constaté ; résultats à vérifier avant toute promotion PASS.
+- **Usage :** seule source cohérente pour tenter une compilation de développement
+  regroupant les fonctions prioritaires ; **aucun APK compilé** lors de cette reprise.
+- **Politique :** branche provisoire non destinée à un merge automatique.
+  Les PR indépendantes restent les unités de revue. Aucun changement de `main`.
+
+Lancer uniquement le build de développement `LANGS=fr bash
+android_port/tools/build.sh --roms "/chemin/vers/roms" --no-install`
+après préparation locale de la ROM FR et des toolchains. L'installation du
+paquet `com.cer0.emerald.dev` et l'injection de ROM restent des opérations
+distinctes, avec vérification des permissions et du jeu sur AYN Thor.
