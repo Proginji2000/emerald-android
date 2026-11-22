@@ -91,6 +91,8 @@ typedef bool bool8;
 #define H 240
 #define CTR_BOTTOM_WIN_X 40
 #define CTR_BOTTOM_WIN_Y 40
+#define CTR_BOTTOM_WIN_SCREEN_Y CTR_BOTTOM_WIN_Y
+#define CTR_BOTTOM_EXTRA 0
 #define PARTY_SIZE 6
 #define POKEMON_NAME_LENGTH 10
 #define PLAYER_NAME_LENGTH 7
@@ -134,20 +136,21 @@ struct CtrDexView { u8 state, national, data[300]; };
     source += function(plate, 'static void PlateBounds(')
     for name in ('HEAD_Y', 'HEAD_H', 'HEAD_Y_X', 'HEAD_Y_W', 'TITLE_X', 'TITLE_W', 'REPEL_X', 'REPEL_W', 'CLOCK_X',
                  'CLOCK_W', 'RUN_X', 'RUN_W', 'TITLE_WIDE_W', 'DOCK_Y', 'DOCK_TOP', 'DOCK_H', 'DOCK_GAP', 'AREA_X',
-                 'AREA_Y', 'AREA_W', 'AREA_H', 'MAP_WIN_X', 'MAP_WIN_Y', 'MAP_WIN_W', 'MAP_WIN_H', 'MAP_ORIGIN_X',
+                 'AREA_Y', 'AREA_W', 'AREA_H', 'GV_Y', 'GV_H', 'GV_BOTTOM',
+                 'MAP_WIN_X', 'MAP_WIN_Y', 'MAP_WIN_W', 'MAP_WIN_H', 'MAP_ORIGIN_X',
                  'MAP_ORIGIN_Y', 'GAME_WIN_X', 'GAME_WIN_Y', 'GAME_WIN_W', 'GAME_WIN_H'):
         source += define(shell, name)
     for name in ('MAP_PIC_W', 'MAP_PIC_H'):
         source += define((ROOT / 'src/3ds_bottom_field.inc').read_text(encoding='utf-8'), name)
     for name in ('SUM_TAB_H', 'SUM_Y', 'SUM_LEFT_W', 'SUM_PIC_BOTTOM'):
         source += define((ROOT / 'src/3ds_bottom_game.inc').read_text(encoding='utf-8'), name)
-    for name in ('OPT_PANEL_Y', 'OPT_PANEL_H'):
+    for name in ('OPT_TAB_H', 'OPT_GROUP_Y', 'OPT_GROUP_H', 'OPT_PANEL_Y', 'OPT_PANEL_H'):
         source += define(options, name)
     source += r'''
 typedef struct { s16 x, y, w, h; u8 id; } Hit;
 static Hit sHits[64];
 static u8 sHitCount;
-static int sOX;
+static int sOX, sOY;
 static ViewState sShown, sState;
 static bool sInUse;
 static bool CtrVideo_BottomInUse(void) {return sInUse;}
