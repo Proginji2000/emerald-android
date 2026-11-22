@@ -125,7 +125,7 @@ aucun écrasement de l'application stable.
   PR #4 (VITESSE COMBAT et libellé FR), PR #3 (attributions et licence).
   Les deux fichiers d'options ont été fusionnés sans écraser la ligne `map_progressive`.
 - **CI push :** https://github.com/Proginji2000/emerald-android/actions/runs/45051243446 .
-  Lancement constaté ; résultats à vérifier avant toute promotion PASS.
+  **Résultat contrôlé : `host-tests` PASS et `audit-and-python` PASS ; `build-3ds` encore en cours.** Aucun APK Android compilé.
 - **Usage :** seule source cohérente pour tenter une compilation de développement
   regroupant les fonctions prioritaires ; **aucun APK compilé** lors de cette reprise.
 - **Politique :** branche provisoire non destinée à un merge automatique.
