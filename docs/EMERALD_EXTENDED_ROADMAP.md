@@ -215,3 +215,30 @@ de licence apparente et d'adéquation générale ; **aucun code ni asset n'a ét
 dans une autre base ne constitue donc pas une preuve de compatibilité
 binaire, de scripts, de flags ou de sauvegarde. Ne jamais fusionner
 directement un moteur d'expansion complet sans protocole de migration.
+
+## 12. Validation CI de la base intégrée et préparation Android
+
+**2026-11-22 — GitHub Actions :**
+`integration/ayn-thor-preview-20261122`, SHA `a075c2c5` :
+run https://github.com/Proginji2000/emerald-android/actions/runs/45051243446
+**SUCCESS** (jobs `host-tests`, `build-3ds`, `audit-and-python` PASS).
+Il s'agit de la **compilation 3DS**, non d'une compilation Android.
+L'artifact `emerald3ds-engine` n'est pas un APK.
+
+**Outil d'étape suivante :**
+[PR #6](https://github.com/Proginji2000/emerald-android/pull/6),
+`tooling/android-fr-preflight-20261122`, SHA `22d31c99`,
+base `integration/ayn-thor-preview-20261122`. Le script
+`android_port/tools/preflight_fr.sh` valide les dépendances locales et le SHA-1
+de la ROM BPEF avant d'autoriser `--build`, avec `--no-install` obligatoire.
+Voir `docs/AYN_THOR_DEV_BUILD.md`.
+Son run PR `45075917876` a **`host-tests` PASS** (y compris test de
+précontrôle sur fausse ROM synthétique) et **`audit-and-python` PASS** ;
+`build-3ds` était encore en cours à la consultation. **Aucun APK Android
+n'a été produit**, et aucun essai matériel AYN Thor n'a été effectué.
+
+**Garde de livraison :** la ROM française personnelle n'est jamais placée
+dans GitHub ou un artifact CI public. La compilation Android s'effectue
+localement et produit un package de développement `com.cer0.emerald.dev`,
+qui doit être contrôlé avant installation. Préserver la version officielle
+`com.cer0.emerald`, sa sauvegarde et les fichiers auxiliaires d'horloge.
