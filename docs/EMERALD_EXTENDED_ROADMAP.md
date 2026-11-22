@@ -196,3 +196,22 @@ Le script `android_port/tools/dev_rom.sh` existe mais transfère une ROM dans
 sur AYN Thor avant tout usage. Ne pas copier la sauvegarde officielle dans le profil dev
 sans sauvegarde, empreinte et procédure de restauration vérifiées. Aucun APK de développement
 n'a été construit/testé pendant cette reprise ; la CI courante ne compile pas d'APK Android.
+
+## 11. Inventaire initial des projets de réutilisation
+
+**Constat GitHub du 22/11/2026.** Il s'agit d'une vérification d'existence,
+de licence apparente et d'adéquation générale ; **aucun code ni asset n'a été réutilisé**.
+
+| Source | Constats vérifiés | Décision |
+| --- | --- | --- |
+| [Goldoire/pokeemerald-dualscreen](https://github.com/Goldoire/pokeemerald-dualscreen) | Repo public actif, portage natif Android double écran AYN Thor. `LICENSE` MIT **limité aux modifications originales du port** ; contenu Pokémon et tiers exclus. README précise expérience vanilla et ROM USA/Europe, sans prise en charge de hacks. | Référence utile pour l'UI et la disposition ; audit par fichier et compatibilité FR requis avant portage. |
+| [rh-hideout/pokeemerald-expansion](https://github.com/rh-hideout/pokeemerald-expansion) | Base de ROM hack avec fonctions modernes, dérivée de `pret/pokeemerald`. README demande de créditer RHH et indique un risque d'incompatibilité multijoueur avec les jeux officiels. Aucun fichier `LICENSE` racine dans l'inventaire consulté (des droits peuvent être définis ailleurs). | Audit fonctionnel/licence fichier par fichier, delta du `pokeemerald` épinglé et migration de sauvegarde avant tout import. |
+| [DonovanSwinthrop/thor-companion](https://github.com/DonovanSwinthrop/thor-companion) | Dépôt public avec licence GPLv3 en racine. | Utiliser comme référence comportementale du fast-forward intelligent ; ne pas copier du code sans analyse de compatibilité et d'obligations GPL. |
+| [Pokabbie/pokeemerald-rogue](https://github.com/Pokabbie/pokeemerald-rogue) | Dépôt public ; branche par défaut `vanilla`, README de décompilation `pokeemerald` et non spécification directe des fonctions Rogue. Pas de `LICENSE` visible à la racine lors de l'inventaire. | Identifier la bonne branche/tag et provenance de chaque module avant étude technique ; aucune réutilisation autorisée par simple existence du repo. |
+| Pokémon Emerald Crest | Jeu et références documentés, mais aucun audit de code source ou licence exécuté dans cette reprise. | **BLOCKED** pour import de code/assets jusqu'à preuve explicite d'accès aux sources et des licences. |
+
+**Référence du port :** `upstream.lock` épingle `pret/pokeemerald` au commit
+`76463dac15cad36aca5e2b3f6366abf9e53f814f`. Une fonction disponible
+dans une autre base ne constitue donc pas une preuve de compatibilité
+binaire, de scripts, de flags ou de sauvegarde. Ne jamais fusionner
+directement un moteur d'expansion complet sans protocole de migration.
