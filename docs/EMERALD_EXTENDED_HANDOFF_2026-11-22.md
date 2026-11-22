@@ -125,7 +125,7 @@ aucun écrasement de l'application stable.
   PR #4 (VITESSE COMBAT et libellé FR), PR #3 (attributions et licence).
   Les deux fichiers d'options ont été fusionnés sans écraser la ligne `map_progressive`.
 - **CI push :** https://github.com/Proginji2000/emerald-android/actions/runs/45051243446 .
-  **Résultat contrôlé : `host-tests` PASS et `audit-and-python` PASS ; `build-3ds` encore en cours.** Aucun APK Android compilé.
+  **Résultat contrôlé : `host-tests` PASS, `build-3ds` PASS et `audit-and-python` PASS.** Le run `45051243446` est terminé SUCCESS. Aucun APK Android compilé.
 - **Usage :** seule source cohérente pour tenter une compilation de développement
   regroupant les fonctions prioritaires ; **aucun APK compilé** lors de cette reprise.
 - **Politique :** branche provisoire non destinée à un merge automatique.
@@ -136,3 +136,44 @@ android_port/tools/build.sh --roms "/chemin/vers/roms" --no-install`
 après préparation locale de la ROM FR et des toolchains. L'installation du
 paquet `com.cer0.emerald.dev` et l'injection de ROM restent des opérations
 distinctes, avec vérification des permissions et du jeu sur AYN Thor.
+
+## 8. Passage de la CI au build Android français (22/11/2026, soirée)
+
+**Premier point de qualification :**
+La branche combinée `integration/ayn-thor-preview-20261122` au commit
+`a075c2c5` a **trois jobs PASS** sur
+https://github.com/Proginji2000/emerald-android/actions/runs/45051243446 :
+`host-tests`, `build-3ds` et `audit-and-python`.
+L'artifact `emerald3ds-engine` existe sur ce run ; **ce n'est pas un APK Android**.
+L'ancien run PR #1 sous ASan demeure un échec historique ; il ne faut pas
+l'effacer ni déduire un diagnostic C absent de ses logs.
+
+**PR #6 — précontrôle Android :**
+https://github.com/Proginji2000/emerald-android/pull/6,
+branche `tooling/android-fr-preflight-20261122`, commit `22d31c99`,
+empilée sur la branche d'intégration. Elle contient :
+
+- `android_port/tools/preflight_fr.sh` : lecture seule par défaut ;
+  vérification SHA-1 de la ROM française et prérequis Linux/WSL2 SDK,
+  NDK, devkitPro, Python, Podman et signature de debug.
+- Option `--build` : constructeur existant `LANGS=fr`,
+  `--no-install` ; variables `RELEASE`, `PACKAGE`,
+  `KEYSTORE` neutralisées.
+- `docs/AYN_THOR_DEV_BUILD.md` : procédure et critères STOP.
+- Test CI sur un fichier `.gba` synthétique invalide, sans ROM vraie.
+  **La CI de la PR #6 doit être relue avant de marquer ces tests PASS.**
+
+**Blocage résiduel :** la compilation de l'APK dépend d'une ROM
+française personnelle propre et de l'outillage Android sur une machine
+locale. Ce contexte n'est pas accessible via le connecteur GitHub.
+Aucune ROM ni sauvegarde n'a été transférée. Aucun APK du fork n'a été
+compilé/chargé sur l'AYN Thor dans cette reprise.
+
+**Action suivante :** sur le poste local Linux/WSL2, récupérer la branche
+`tooling/android-fr-preflight-20261122`, puis exécuter
+`bash android_port/tools/preflight_fr.sh --roms "/chemin/local/roms"`.
+Après PASS et contrôle des dépendances :
+`bash android_port/tools/preflight_fr.sh --roms "/chemin/local/roms" --build`.
+Lire les logs réels avant d'envisager l'installation d'un package
+`com.cer0.emerald.dev`. Le package stable `com.cer0.emerald` et ses
+fichiers restent intacts.
