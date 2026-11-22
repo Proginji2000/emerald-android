@@ -45,14 +45,18 @@ def main():
     extras = (ROOT / 'src/3ds_extras.c').read_text(encoding='utf-8')
     table = (ROOT / 'src/3ds_field_qol_extras.inc').read_text(encoding='utf-8')
     field = (ROOT / 'src/3ds_bottom_field.inc').read_text(encoding='utf-8')
-    # Visit markers are shown on the normal map, not only in Fly mode.
+    # Classic MAP preserves the original picture. Progressive MAP draws
+    # grey/visited town markers; Fly must keep showing its destinations.
     draw_map = function(field, 'static void DrawRegionMap(')
     snapshot = function(bottom, 'static void Snapshot(')
     move_cursor = function(bottom, 'static bool8 MoveMapCursor(')
-    assert 'DrawFlyIcons(s);' in draw_map
-    assert 'if (s->mapFly)\n            DrawFlyIcons(s);' not in draw_map
+    assert 'EXTRA_ROW("map_progressive")' in options
+    assert '"map_progressive", 2, 0, sMapModes' in extras
+    assert 's->mapProgressive = CtrExtras_Get("map_progressive") != 0;' in snapshot
+    assert 'if (s->mapFly || s->mapProgressive)\n            DrawFlyIcons(s);' in draw_map
     assert snapshot.index('s->flyVisited |= 1 << i;') < snapshot.index('if (s->mapFly)\n                s->flyCanFly')
-    # On the fast cursor path, restore icons over the static map cache.
+    # The optimized cursor redraw restores icons only when enabled.
+    assert 'if (to->mapProgressive)' in move_cursor
     assert 'DrawFlyIcons(to);' in move_cursor
     assert move_cursor.index('DrawFlyIcons(to);') < move_cursor.index('DrawMapMarks(to);')
     # Entries after the sentinel corrupt count-based settings lookup.
