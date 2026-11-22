@@ -44,6 +44,17 @@ def main():
     clock = (ROOT / 'src/3ds_clock_store.c').read_text(encoding='utf-8')
     extras = (ROOT / 'src/3ds_extras.c').read_text(encoding='utf-8')
     table = (ROOT / 'src/3ds_field_qol_extras.inc').read_text(encoding='utf-8')
+    field = (ROOT / 'src/3ds_bottom_field.inc').read_text(encoding='utf-8')
+    # Visit markers are shown on the normal map, not only in Fly mode.
+    draw_map = function(field, 'static void DrawRegionMap(')
+    snapshot = function(bottom, 'static void Snapshot(')
+    move_cursor = function(bottom, 'static bool8 MoveMapCursor(')
+    assert 'DrawFlyIcons(s);' in draw_map
+    assert 'if (s->mapFly)\n            DrawFlyIcons(s);' not in draw_map
+    assert snapshot.index('s->flyVisited |= 1 << i;') < snapshot.index('if (s->mapFly)\n                s->flyCanFly')
+    # On the fast cursor path, restore icons over the static map cache.
+    assert 'DrawFlyIcons(to);' in move_cursor
+    assert move_cursor.index('DrawFlyIcons(to);') < move_cursor.index('DrawMapMarks(to);')
     # Entries after the sentinel corrupt count-based settings lookup.
     assert extras.index('#include "3ds_field_qol_extras.inc"') < extras.index('    {0},')
     hook_patch = ROOT.parent / 'patches/pokeemerald/0078-field-clock-notice.patch'
@@ -450,7 +461,9 @@ static void TestMark(void) {
     ViewState a=Field(SCR_MAP),b;
     a.mapsec=2;a.cursorX=9;a.cursorY=8;
     b=a;b.cursorX++;assert(MapCursorOnlyMoved(&b,&a));
-    b.repelSteps=40;assert(MapCursorOnlyMoved(&b,&a));
+    /* Discovering a city must trigger a full redraw, not just move the icon. */
+    b.flyVisited=1;assert(!MapCursorOnlyMoved(&b,&a));
+    b=a;b.cursorX++;b.repelSteps=40;assert(MapCursorOnlyMoved(&b,&a));
     b.mapsec=32;assert(MapCursorOnlyMoved(&b,&a));
     b=a;assert(!MapCursorOnlyMoved(&b,&a));
     b=a;b.cursorX++;b.clockMinute++;assert(!MapCursorOnlyMoved(&b,&a));
