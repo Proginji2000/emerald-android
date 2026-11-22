@@ -56,6 +56,19 @@ jobs:
         run: python 3ds_port/tests/battle_options_test.py
       - name: Bottom map and clock footer
         run: python 3ds_port/tests/bottom_map_test.py
+      - name: Android French preflight contract (synthetic, no ROM)
+        run: |
+          bash -n android_port/tools/preflight_fr.sh
+          bash android_port/tools/preflight_fr.sh --help
+          d="$(mktemp -d)"
+          trap 'rm -rf "$d"' EXIT
+          printf 'not a ROM' > "$d/invalid.gba"
+          if output="$(bash android_port/tools/preflight_fr.sh --roms "$d" 2>&1)"; then
+            echo "ERROR: invalid ROM was accepted"
+            exit 1
+          fi
+          printf '%s\n' "$output" | grep -F 'clean French BPEF ROM not found'
+
 
   build-3ds:
     runs-on: ubuntu-latest
