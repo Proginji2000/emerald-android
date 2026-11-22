@@ -137,3 +137,62 @@ Les éléments marqués « existe » restent à valider sur le matériel cible. 
 - Les `*.sav`, `*.clock` et `*.clock.bak` de l'utilisateur restent hors dépôt.
 
 **Ordre de travail :** P0 stabilité du fork/Android ; P1 réglages et tests ; P2 PokéNav ; P3 saisons ; P4 postgame.
+
+## 10. Reprise GitHub du 22 novembre 2026 — suivi de réalisation
+
+**Base contrôlée :** fork `main` et upstream `main` identiques au SHA `ba8ca267`.
+Aucun merge sur `main`. Les PR #1 à #5 restent en brouillon et leurs validations restent indépendantes.
+
+| PR | Branche | Commit de travail | État prouvé |
+| --- | --- | --- | --- |
+| [#1](https://github.com/Proginji2000/emerald-android/pull/1) | `feat/visited-city-markers` | `58800979` | `host-tests` PASS ; échec ASan `verify-pokedex-capture` sur run push `45047313756` |
+| [#2](https://github.com/Proginji2000/emerald-android/pull/2) | `docs/emerald-extended-roadmap-20261122` | évolue avec cette passation | documentation, pas un build |
+| [#3](https://github.com/Proginji2000/emerald-android/pull/3) | `fix/release-audit-provenance-20261122` | `ca7d966d` | `audit-and-python` PASS sur run `45050456744`; autres jobs non qualifiés |
+| [#4](https://github.com/Proginji2000/emerald-android/pull/4) | `feat/battle-speed-options-20261122` | `ee834a5e` | test `Battle speed option registration` PASS sur run `45050810065`; suite des tests non verte |
+| [#5](https://github.com/Proginji2000/emerald-android/pull/5) | `feat/map-display-mode-20261122` | `4e1fc36d` | `host-tests` PASS sur run `45050969611`; audit sans PR #3 encore FAIL |
+
+La PR #5 est **empilée sur la branche de la PR #1**, pas directement sur `main`.
+Elle ajoute `OPTIONS → MONDE → AIDES → AFFICH. CARTE`, valeurs CLASSIQUE par défaut / PROGRESSIVE.
+Les marqueurs de la carte du mode Vol restent visibles dans les deux modes. Le choix utilise
+`map_progressive` dans `settings.txt`; aucune migration de sauvegarde.
+
+La PR #4 expose `OPTIONS → COMBAT → SCÈNE → VITESSE COMBAT` :
+AUTO (suit la vitesse générale), ×1, ×1,5, ×2, ×3 et ×4.
+Elle réemploie `CtrSettings_StepBattleSpeed` et la clé `battle_speed`, sans second moteur.
+Le libellé français de `trade_evo` devient `ÉVOL. SANS ÉCHANGE`.
+L'aide explicite « niveau 40, objet tenu si requis » reste à concevoir sans débordement UI.
+
+**CI transversale :** avant le correctif PR #3, l'audit strict signale cinq icônes Android
+sans provenance et `dlmalloc` sans fichier licence reconnu. La PR #3 ajoute les preuves,
+sans modifier l'audit ; `audit-and-python` est PASS sur la branche #3.
+Sur `main`, la fixture `bottom_map_test.py` échoue avec des constantes manquantes ;
+les corrections de la PR #1 réparent le test hôte, mais sont encore non fusionnées.
+L'échec ASan `SIGSEGV` de `pokedex_capture` n'a pas de diagnostic C complet ;
+aucun sanitizer ne doit être désactivé pour masquer le problème.
+
+**Intégration contrôlée :** qualifier PR #3 (audit) et PR #1 (fixture/carte), puis PR #5
+(empilée), et rebaser/qualifier PR #4 après intégration des prérequis.
+Ne fusionner aucune PR avant vérification des checks sur le commit à merger et
+acceptation des risques. Rafraîchir les résultats CI avant toute conclusion globale.
+
+### Procédure Android à qualifier (Aucune compilation exécutée à cette date)
+
+Le script officiel `android_port/tools/build.sh` recherche les ROMs propres par SHA-1.
+Pour le français, le SHA-1 attendu est `ca666651374d89ca439007bed54d839eb7bd14d0`.
+Il utilise le checkout courant, un toolchain Android NDK, les outils devkitARM,
+le bootstrap du `pokeemerald` épinglé, les dépendances de génération et les recettes.
+
+**Sur une machine disposant déjà des prérequis et de la ROM française personnelle :**
+
+```bash
+LANGS=fr bash android_port/tools/build.sh --roms "/chemin/vers/roms" --no-install
+```
+
+Ce mode construit, sous réserve des dépendances, `build/android-dev/emerald-android-dev.apk`
+avec package `com.cer0.emerald.dev`. **Ne pas utiliser `--release`** pour les essais :
+la publication utilise `com.cer0.emerald` et pourrait remplacer l'application stable.
+Le script `android_port/tools/dev_rom.sh` existe mais transfère une ROM dans
+`Android/data/com.cer0.emerald.dev` via shell ; vérifier lecture et ownership Android
+sur AYN Thor avant tout usage. Ne pas copier la sauvegarde officielle dans le profil dev
+sans sauvegarde, empreinte et procédure de restauration vérifiées. Aucun APK de développement
+n'a été construit/testé pendant cette reprise ; la CI courante ne compile pas d'APK Android.
