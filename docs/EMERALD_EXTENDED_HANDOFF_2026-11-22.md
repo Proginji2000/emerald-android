@@ -70,3 +70,48 @@
 7. Conserver les PR en brouillon tant que les tests nécessaires sont incomplets. Remonter un état PASS/PARTIAL/FAIL/BLOCKED avec preuves réelles.
 
 **Exécution :** privilégier modifications autonomes groupées, commits ciblés, comparaison GitHub, tests CI ; ne demander à l'utilisateur que les contrôles réellement nécessaires sur AYN Thor ou la fourniture locale de ses propres données de jeu. Ne pas attribuer des tests non exécutés au matériel.
+
+## 6. Reprise GitHub exécutée le 22 novembre 2026
+
+- `main` du fork et upstream identiques (`ba8ca267`), non modifiés.
+- PR #1 : `58800979`, `host-tests` PASS, ASan `SIGSEGV` dans
+  `verify-pokedex-capture` au run push `45047313756`, cause non démontrée.
+- **PR #3 — audit :** https://github.com/Proginji2000/emerald-android/pull/3 ;
+  commit `ca7d966d` ; 5 dérivés d'icônes documentés dans l'allowlist,
+  licence/source de `dlmalloc` documentées. Comparaison texte complète
+  identique (221 525 caractères) avec Boost.Container 1.92.0 `dlmalloc_2_8_6.c`.
+  `audit-and-python` PASS sur run `45050456744` ; `host-tests` FAIL pour la fixture de base.
+- **PR #4 — vitesse combat et libellé FR :** https://github.com/Proginji2000/emerald-android/pull/4 ;
+  commit `ee834a5e` ; `VITESSE COMBAT` dans Combat → Scène, valeurs AUTO/1/1,5/2/3/4×,
+  réemploi du moteur `CtrSettings_StepBattleSpeed`. Le nouveau pas CI
+  `Battle speed option registration` est PASS sur run `45050810065`.
+  Le job `host-tests` reste FAIL à cause de la fixture de base.
+- **PR #5 — choix CLASSIQUE/PROGRESSIVE :** https://github.com/Proginji2000/emerald-android/pull/5 ;
+  commit `4e1fc36d`, branchée sur PR #1 (stacked, base `feat/visited-city-markers`).
+  `host-tests` PASS sur run `45050969611`; les autres jobs doivent être recontrôlés.
+  La carte classique est la valeur par défaut ; le mode Vol reste inchangé.
+  Aucun changement du format de sauvegarde.
+- Les audits des PR #4/#5 restent FAIL **tant que la PR #3 n'est pas intégrée**.
+  Ne pas changer les contrôles pour dissimuler cet état.
+- Les builds 3DS de ces PR étaient encore en cours au dernier contrôle ; aucun APK Android
+  du fork n'a été généré, installé ou testé sur AYN Thor.
+
+### Suite immédiate
+
+1. Recontrôler les dernières CI : tous les jobs, les causes exactes et les runs après merge/rebase.
+2. Diagnostiquer l'ASan `pokedex_capture` avec des preuves reproductibles, sans désactiver les sanitizers.
+3. Intégrer de façon contrôlée la correction d'audit et les corrections de fixture/test ;
+   requalifier la PR #4 et la PR #5 sur les nouvelles bases.
+4. Préparer la compilation **développement uniquement** :
+   `LANGS=fr bash android_port/tools/build.sh --roms "/chemin/vers/roms" --no-install`.
+   SHA-1 ROM FR attendu : `ca666651374d89ca439007bed54d839eb7bd14d0`.
+   APK dev : `build/android-dev/emerald-android-dev.apk`, package `com.cer0.emerald.dev`.
+   Ne pas employer `--release` ou `adb install -r` sur le package officiel.
+5. Effectuer sur AYN Thor les essais carte classique/progressive, mode Vol, vitesse réelle
+   en combat, commandes, cycle jour/nuit, et sauvegarde/relance. Aucun essai non exécuté
+   ne peut être déclaré PASS.
+6. Passer ensuite au PokéNav dynamique par zone, avant saisons et postgame.
+
+**Interdits conservés :** aucune ROM, sauvegarde ou donnée personnelle dans GitHub ;
+aucune modification de `main` sans qualification ; aucune désactivation de l'audit ;
+aucun écrasement de l'application stable.
