@@ -85,7 +85,28 @@ jobs:
           python3 builder/tests/test_asset_table_compatibility.py
           python3 tools/bootstrap.py --make -j4 --python python3
       - name: Host tests and link audit
-        run: make -C build/upstream/3ds_port verify PYTHON=python3
+        run: |
+          mkdir -p ci-diagnostics
+          set +e
+          timeout --signal=TERM --kill-after=15s 25m \
+            make -C build/upstream/3ds_port verify PYTHON=python3 \
+            > ci-diagnostics/3ds-verify.log 2>&1
+          status=$?
+          set -e
+          echo "3DS verify exit code: $status"
+          tail -n 160 ci-diagnostics/3ds-verify.log
+          if [ "$status" -eq 124 ] || [ "$status" -eq 137 ]; then
+            echo "::error::3DS verify exceeded 25 minutes; inspect the captured log for the last running target."
+          fi
+          exit "$status"
+      - name: Preserve failure diagnostics
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: 3ds-verify-diagnostics
+          path: ci-diagnostics/3ds-verify.log
+          retention-days: 3
+          if-no-files-found: warn
       - name: Production timed encounter rules
         run: python3 3ds_port/tests/encounter_tables_test.py --tree build/upstream
       - name: Production berry clock integration
