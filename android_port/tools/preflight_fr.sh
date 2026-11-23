@@ -67,6 +67,19 @@ for tool in git make gcc g++ sha1sum javac java zip python3 arm-none-eabi-as pic
     require_command "$tool"
 done
 
+# android.mk runs check_overlays.py using system python3, NOT build/venv.
+# Validate both the bindings and libclang's shared library before a long build.
+if command -v python3 >/dev/null 2>&1; then
+    if ! python3 - >/dev/null 2>&1 <<'PY'
+from clang import cindex
+cindex.Index.create()
+PY
+    then
+        echo 'BLOCKED: system python3 cannot load libclang (Ubuntu: sudo apt install python3-clang).' >&2
+        missing=1
+    fi
+fi
+
 SDK="${ANDROID_HOME:-$HOME/Android/Sdk}"
 if [[ ! -d "$SDK" ]]; then
     echo "BLOCKED: Android SDK not found at $SDK (set ANDROID_HOME)." >&2
