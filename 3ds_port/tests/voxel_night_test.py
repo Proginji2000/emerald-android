@@ -25,8 +25,15 @@ def sanitize(cc):
         temporary = Path(directory)
         (temporary / "probe.c").write_text("int main(void) { return 0; }\n", encoding="utf-8")
         flags = ["-fsanitize=address,undefined"]
+        # Linux GCC may build PIE host fixtures whose ASan shadow mapping fails
+        # during process startup (repeated DEADLYSIGNAL without a C stack).
+        # Keep ASan/UBSan active and instead use a fixed-address non-PIE test binary.
+        if sys.platform.startswith("linux"):
+            flags += ["-fno-pie", "-no-pie"]
         probe = subprocess.run([cc, *flags, str(temporary / "probe.c"), "-o", str(temporary / "probe")],
                                stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        if probe.returncode != 0 and sys.platform.startswith("linux"):
+            raise RuntimeError("Linux host compiler cannot link required ASan/UBSan fixture")
         return flags if probe.returncode == 0 else []
 
 
