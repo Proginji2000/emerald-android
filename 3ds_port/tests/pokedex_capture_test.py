@@ -1,6 +1,7 @@
 """Exercise native capture tasks, the layout bridge and software-rasterized rendering."""
 import argparse
 import os
+import sys
 from pathlib import Path
 import subprocess
 import tempfile
@@ -523,6 +524,12 @@ def sanitizers(cc, folder):
     """The address and undefined-behaviour checks, when the host compiler can
     link them (MinGW's gcc has neither): said, not dropped silently."""
     flags = ["-fsanitize=address,undefined", "-fno-sanitize-recover=all", "-fno-omit-frame-pointer"]
+    # A default-PIE GCC executable can collide with ASan's shadow mapping
+    # under Linux ASLR and exit with bare DEADLYSIGNAL before giving a C stack.
+    # These temporary host-test executables do not need PIE. Keep ASan and
+    # UBSan enabled; change only the link/load layout, never the assertions.
+    if sys.platform.startswith("linux"):
+        flags += ["-fno-pie", "-no-pie"]
     probe = folder / "sanitizer_probe.c"
     probe.write_text("int main(void) { return 0; }\n", encoding="utf-8")
     result = subprocess.run([cc, *flags, str(probe), "-o", str(folder / "sanitizer_probe")],
