@@ -30,7 +30,11 @@ Les correctifs ASan des tests hôte utilisent des exécutables non-PIE sous Linu
 | P1 — évolutions sans échange | Libellé corrigé dans PR #4, seuil 40 existant | Test en jeu restant |
 | P2 — PokéNav | Rencontres et taux existants, statut capturé et index objets/cadeaux/échanges à étendre | À développer |
 | P3 — saisons | Étude de réutilisation et compatibilité | À étudier |
-| P4 — postgame | Huit nouveaux indicateurs de badges et Ligue renforcée | À concevoir |
+| P4 — Acte II | Campagne narrative post-Ligue, quêtes principales et secondaires, PNJ, dialogues, exploration, huit nouveaux badges et Ligue renforcée | À concevoir |
+
+### Nouvelle exigence P4 — 24/11/2026
+
+L'utilisateur demande explicitement de prolonger le **scénario**, et non de limiter le postgame aux combats. Concevoir un Acte II cohérent avec Hoenn : intrigue principale, chapitres, quêtes hors combat, nouveaux événements/PNJ, dialogues conditionnels, exploration, récompenses, puis résolution narrative. Les huit badges sont des jalons, pas le seul objectif. Les pistes Aqua/Magma, anomalies climatiques, ruines et légendaires restent des propositions à valider. Réutiliser les scripts et systèmes de progression existants après audit. Premier prototype : chapitre jouable après la Ligue, objectif hors combat, récompense unique, sauvegarde/reprise. Voir section P4 de la roadmap. Aucun contenu narratif nouveau implémenté à ce jour.
 
 ### Reprise immédiate
 
