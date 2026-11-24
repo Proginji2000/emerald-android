@@ -41,6 +41,8 @@ The planned postgame is a narrative continuation of the original adventure, not 
 
 ### Development and progress
 
+- [Operational backlog](docs/EMERALD_EXTENDED_BACKLOG.md) — sixteen work items, priorities, dependencies and acceptance criteria. GitHub Issues must be enabled before creating the tickets.
+- [Upstream synchronization policy](docs/UPSTREAM_SYNC.md) — track both Cer0-D Android and ZallaxDev Emerald 3DS; integrate changes on qualification branches, not by automatic merges.
 - [Project roadmap](https://github.com/Proginji2000/emerald-android/blob/docs/emerald-extended-roadmap-20261122/docs/EMERALD_EXTENDED_ROADMAP.md) — scope, milestones, reuse research and acceptance criteria.
 - [Technical handoff](https://github.com/Proginji2000/emerald-android/blob/docs/emerald-extended-roadmap-20261122/docs/EMERALD_EXTENDED_HANDOFF_2026-11-22.md) — current state, reproducible procedures and next actions.
 - [French local build guide / PR #6](https://github.com/Proginji2000/emerald-android/pull/6) — isolated development APK, WSL2 and preflight checks.
