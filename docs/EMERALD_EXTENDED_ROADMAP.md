@@ -36,6 +36,14 @@ Les correctifs ASan des tests hôte utilisent des exécutables non-PIE sous Linu
 | P3 — saisons | Étude de réutilisation et compatibilité | À étudier |
 | P4 — Acte II | Deuxième campagne scénarisée, quêtes, nouveaux événements, huit badges supplémentaires et Ligue renforcée | À concevoir |
 
+### Organisation opérationnelle et maintenance upstream — 24/11/2026
+
+Le [backlog opérationnel](https://github.com/Proginji2000/emerald-android/blob/main/docs/EMERALD_EXTENDED_BACKLOG.md) centralise 16 tickets préparés EE-001 à EE-016, priorités, dépendances et critères d'acceptation. Les Issues GitHub sont désactivées sur le fork (HTTP 410 lors de la tentative de création) : activer Settings → General → Features → Issues avant de créer les tickets ; rechercher les doublons, puis reporter les numéros réels. Aucun ticket GitHub n'est déclaré créé tant que l'API ne confirme pas l'opération.
+
+La [politique de synchronisation upstream](https://github.com/Proginji2000/emerald-android/blob/main/docs/UPSTREAM_SYNC.md) formalise le suivi conjoint de Cer0-D/emerald-android (parent direct, main/releases) et ZallaxDev/emerald-3ds (main/releases ; dev/integration en veille). Privilégier les mises à jour Android déjà portées, examiner les backports 3DS individuellement, intégrer sur branche dédiée et qualifier sans écraser les modifications locales ni la sauvegarde. Les SHA observés et les références de release sont consignés dans ce document. Ne pas confondre veille avec synchronisation réalisée.
+
+Les derniers changements de main sont documentaires (README, backlog et politique upstream), sans merge du moteur. Les PR #6/#7 restent des branches de développement.
+
 ### Reprise immédiate
 
 1. Lire [le rapport QA du 23/11](https://github.com/Proginji2000/emerald-android/blob/fix/thor-runtime-feedback-20261123/docs/AYN_THOR_QA_2026-11-23.md). Recontrôler le run PR #7 relancé, sans supposer sa réussite.
