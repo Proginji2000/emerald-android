@@ -1,6 +1,6 @@
 # Emerald Extended — Backlog opérationnel
 
-Date de cadrage : 24 novembre 2026. **16 issues GitHub ouvertes et référencées ci-dessous.** Les identifiants EE restent stables ; les numéros # sont les tickets GitHub réels. Priorités P0 à P4 et labels de chantier. Chaque ticket doit relier ses PR, preuves CI et tests matériels ; aucun PASS sans preuve.
+Date de cadrage : 24 novembre 2026. **18 issues GitHub ouvertes et référencées ci-dessous.** Les identifiants EE restent stables ; les numéros # sont les tickets GitHub réels. Priorités P0 à P4 et labels de chantier. Chaque ticket doit relier ses PR, preuves CI et tests matériels ; aucun PASS sans preuve.
 
 ## P0 — Base stable
 
@@ -108,6 +108,16 @@ Prototype vertical : déclenchement après Ligue, nouveau PNJ, dialogue, objecti
 **Issue :** [#24](https://github.com/Proginji2000/emerald-android/issues/24).
 Déployer par chapitre après validation du pilote ; nouvelles cartes/PNJ/équipes/énigmes/événements ; huit badges indépendants et nouvelle Ligue. 
 **Acceptation :** chaque chapitre a un objectif hors combat, sauvegarde et reprise fiables, aucune régression de la campagne initiale, progression complète et conclusion. **Dépendances :** EE-015 et validation des systèmes requis.
+
+### EE-017 — [P4-WORLD] Hoenn évolutif : routes, circuits et connexions post-Ligue
+**Issue :** [#25](https://github.com/Proginji2000/emerald-android/issues/25).
+Nouvelles routes, chemins terrestres et maritimes, routes oubliées réutilisées, passages orientés, connexions modifiées, raccourcis et déviations justifiés par le scénario. Graphe par chapitre avec prérequis, sorties sûres et protection contre les contournements par les capacités de déplacement ; campagne pré-Ligue préservée.
+**Acceptation :** parcours alternatifs significatifs, absence de softlock, sauvegarde/reprise, 2D/voxel et PokéNav qualifiés. **Dépendances :** EE-013/014/015 pour réalisation ; coordination EE-016/009/010/011.
+
+### EE-018 — [P4-GYMS] Refonte complète des huit arènes post-Ligue
+**Issue :** [#26](https://github.com/Proginji2000/emerald-android/issues/26).
+Revoir les huit champions et **tous les dresseurs** de leurs arènes, équipes, capacités, talents, objets, IA, dialogues, épreuves, missions d'accès et progression de difficulté. Ne pas limiter le changement aux niveaux. Préserver intégralement les arènes de la première campagne.
+**Acceptation :** inventaire exhaustif et configuration post-Ligue distincte, huit badges indépendants, tests de défaite/reprise, aucun doublon de récompense ni régression. **Dépendances :** EE-013/014/015 ; coordination EE-016/017.
 
 ## Règles de gestion
 
