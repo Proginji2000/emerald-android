@@ -11,6 +11,11 @@ struct BackupMapLayout gBackupMapLayout;
 struct SaveBlock1 *gSaveBlock1Ptr;
 struct Main gMain;
 struct ObjectEvent gObjectEvents[OBJECT_EVENTS_COUNT];
+/* The production link-player table is supplied by the game; host tests need a fixture. */
+struct LinkPlayerObjectEvent gLinkPlayerObjectEvents[4];
+/* Match the pinned pokeemerald globals used by TrackedLinkPlayerObject. */
+struct CameraObject gFieldCamera;
+struct Sprite gSprites[MAX_SPRITES + 1];
 struct PlayerAvatar gPlayerAvatar;
 const struct Tileset gTileset_General = {0};
 static u16 sFortreeAttributes[280] = {
