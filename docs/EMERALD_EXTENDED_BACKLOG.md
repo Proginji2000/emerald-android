@@ -1,6 +1,6 @@
 # Emerald Extended — Backlog opérationnel
 
-Date de cadrage : 24 novembre 2026. **19 issues GitHub ouvertes et référencées ci-dessous.** Les identifiants EE restent stables ; les numéros # sont les tickets GitHub réels. Priorités P0 à P4 et labels de chantier. Chaque ticket doit relier ses PR, preuves CI et tests matériels ; aucun PASS sans preuve.
+Date de cadrage : 24 novembre 2026. **20 issues GitHub ouvertes et référencées ci-dessous.** Les identifiants EE restent stables ; les numéros # sont les tickets GitHub réels. Priorités P0 à P4 et labels de chantier. Chaque ticket doit relier ses PR, preuves CI et tests matériels ; aucun PASS sans preuve.
 
 ## P0 — Base stable
 
@@ -123,6 +123,11 @@ Revoir les huit champions et **tous les dresseurs** de leurs arènes, équipes, 
 **Issue :** [#27](https://github.com/Proginji2000/emerald-android/issues/27).
 Refonte du Conseil 4 et du Maître, équipes, IA, décors et événements. Retournement narratif au dernier moment inspiré du principe de Noir et Blanc : possibilité de défaite du Maître face à l'antagoniste, crise et exploration au sein de la Ligue, objectifs hors combat, confrontation, résolution, épilogue et compétition régulière après la crise. Écrire un scénario original ; ne pas reproduire les dialogues ou l'intrigue de Noir et Blanc. Marc détrôné et Consortium Horizon sont des pistes provisoires.
 **Acceptation :** finale scénarisée et Ligue entièrement revues, reprise après défaite/sauvegarde, événements uniques sans duplication, Panthéon et première Ligue préservés. **Dépendances :** EE-013/014/015/016/017/018.
+
+### EE-020 — [P4-DEOXYS] Arc du Météore d'Aurore et événement Deoxys
+**Issue :** [#28](https://github.com/Proginji2000/emerald-android/issues/28).
+Réinterprétation originale de l'Épisode Delta adaptée à Émeraude : Centre Spatial d'Algatia, Site Météore, Pilier Céleste, Île Aurore et Deoxys. Étudier un Ticket Aurore obtenu par progression, conserver l'énigme originale et intégrer l'arc au récit de l'Acte II. Vérifier les flags existants, les sauvegardes avec Rayquaza/Deoxys déjà capturés, les cas fuite/K.O. et la reprise ; aucune capture obligatoire, aucune duplication involontaire, pas de Méga-Évolution requise. Respecter la [charte de fidélité](EMERALD_EXTENDED_LEVEL_DESIGN.md).
+**Acceptation :** arc original jouable et rencontre intégrée, événement vanilla préservé, progression sans blocage, FR/2D/voxel/Thor qualifiés. **Dépendances :** EE-013/014/015 ; coordination EE-016/017/019. Conception provisoire, non implémentée.
 
 ## Règles de gestion
 
