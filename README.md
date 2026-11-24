@@ -33,6 +33,7 @@ This is an independent development fork of [Cer0-D/emerald-android](https://gith
 | Day/night cycle and timed encounters | Existing upstream features; current-build device qualification pending |
 | Trade evolutions without trading | Existing optional level-40 rule; French label improved, gameplay validation pending |
 | Dynamic PokéNav: encounters, seen/caught, items, gifts, trades and renewable resources | Planned extension of existing area encounter list |
+| Voxel 3D visual quality: seated NPCs, berry plant grounding and other placement defects | Investigation planned |
 | Four seasons and seasonal effects | Research / design |
 | Expanded postgame — Act II: a second story campaign, new quests, characters, events, exploration, eight additional badge milestones and a reinforced League | Design |
 
