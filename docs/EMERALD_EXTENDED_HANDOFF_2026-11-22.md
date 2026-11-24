@@ -36,6 +36,10 @@ Les correctifs ASan des tests hôte utilisent des exécutables non-PIE sous Linu
 
 L'utilisateur demande explicitement de prolonger le **scénario**, et non de limiter le postgame aux combats. Concevoir un Acte II cohérent avec Hoenn : intrigue principale, chapitres, quêtes hors combat, nouveaux événements/PNJ, dialogues conditionnels, exploration, récompenses, puis résolution narrative. Les huit badges sont des jalons, pas le seul objectif. Les pistes Aqua/Magma, anomalies climatiques, ruines et légendaires restent des propositions à valider. Réutiliser les scripts et systèmes de progression existants après audit. Premier prototype : chapitre jouable après la Ligue, objectif hors combat, récompense unique, sauvegarde/reprise. Voir section P4 de la roadmap. Aucun contenu narratif nouveau implémenté à ce jour.
 
+### Nouvelle exigence voxel — 24/11/2026
+
+L'utilisateur souhaite corriger le rendu voxel 3D existant. Premières anomalies : VOX-01 PNJ debout sur les chaises ; VOX-02 plants de baies surélevés par rapport au sol. Voir chantier P1-D de la roadmap. Réutiliser `voxel_entities.c` (ancrage des sprites, pieds, ModelPush, occlusion), le relief et les outils de validation existants. Localisation exacte/captures et cause racine à établir ; ne pas appliquer un décalage global. Préserver le mode 2D, collisions, scripts et croissance des baies. Aucun correctif de ces anomalies n'a encore été implémenté ni testé. Priorité SAVE maintenue.
+
 ### Reprise immédiate
 
 1. Lire [le rapport QA du 23/11](https://github.com/Proginji2000/emerald-android/blob/fix/thor-runtime-feedback-20261123/docs/AYN_THOR_QA_2026-11-23.md). Recontrôler le run PR #7 relancé, sans supposer sa réussite.
