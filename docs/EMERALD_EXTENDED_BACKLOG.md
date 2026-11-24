@@ -1,6 +1,6 @@
 # Emerald Extended — Backlog opérationnel
 
-Date de cadrage : 24 novembre 2026. **18 issues GitHub ouvertes et référencées ci-dessous.** Les identifiants EE restent stables ; les numéros # sont les tickets GitHub réels. Priorités P0 à P4 et labels de chantier. Chaque ticket doit relier ses PR, preuves CI et tests matériels ; aucun PASS sans preuve.
+Date de cadrage : 24 novembre 2026. **19 issues GitHub ouvertes et référencées ci-dessous.** Les identifiants EE restent stables ; les numéros # sont les tickets GitHub réels. Priorités P0 à P4 et labels de chantier. Chaque ticket doit relier ses PR, preuves CI et tests matériels ; aucun PASS sans preuve.
 
 ## P0 — Base stable
 
@@ -118,6 +118,11 @@ Nouvelles routes, chemins terrestres et maritimes, routes oubliées réutilisée
 **Issue :** [#26](https://github.com/Proginji2000/emerald-android/issues/26).
 Revoir les huit champions et **tous les dresseurs** de leurs arènes, équipes, capacités, talents, objets, IA, dialogues, épreuves, missions d'accès et progression de difficulté. Ne pas limiter le changement aux niveaux. Préserver intégralement les arènes de la première campagne.
 **Acceptation :** inventaire exhaustif et configuration post-Ligue distincte, huit badges indépendants, tests de défaite/reprise, aucun doublon de récompense ni régression. **Dépendances :** EE-013/014/015 ; coordination EE-016/017.
+
+### EE-019 — [P4-LEAGUE] Seconde Ligue scénarisée et dénouement de l'Acte II
+**Issue :** [#27](https://github.com/Proginji2000/emerald-android/issues/27).
+Refonte du Conseil 4 et du Maître, équipes, IA, décors et événements. Retournement narratif au dernier moment inspiré du principe de Noir et Blanc : possibilité de défaite du Maître face à l'antagoniste, crise et exploration au sein de la Ligue, objectifs hors combat, confrontation, résolution, épilogue et compétition régulière après la crise. Écrire un scénario original ; ne pas reproduire les dialogues ou l'intrigue de Noir et Blanc. Marc détrôné et Consortium Horizon sont des pistes provisoires.
+**Acceptation :** finale scénarisée et Ligue entièrement revues, reprise après défaite/sauvegarde, événements uniques sans duplication, Panthéon et première Ligue préservés. **Dépendances :** EE-013/014/015/016/017/018.
 
 ## Règles de gestion
 
