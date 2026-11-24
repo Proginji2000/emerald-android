@@ -41,6 +41,7 @@ The planned postgame is a narrative continuation of the original adventure, not 
 
 ### Development and progress
 
+- [Act II design — consolidated proposal](docs/EMERALD_EXTENDED_ACT2_DESIGN.md) — storyline, progression, Deoxys, second League and implementation gates.
 - [Vanilla level-design principles](docs/EMERALD_EXTENDED_LEVEL_DESIGN.md) — new routes, maps, characters and challenges must fit the original Hoenn style.
 - [Local Android qualification pipeline](docs/ANDROID_LOCAL_QUALIFICATION.md) — guarded WSL build, ADB, device tests and rollback; setup pending.
 - [Operational backlog](docs/EMERALD_EXTENDED_BACKLOG.md) — sixteen work items, priorities, dependencies and acceptance criteria. All sixteen tickets are open in [GitHub Issues](https://github.com/Proginji2000/emerald-android/issues), with priority and area labels.
