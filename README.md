@@ -41,6 +41,7 @@ The planned postgame is a narrative continuation of the original adventure, not 
 
 ### Development and progress
 
+- [Vanilla level-design principles](docs/EMERALD_EXTENDED_LEVEL_DESIGN.md) — new routes, maps, characters and challenges must fit the original Hoenn style.
 - [Local Android qualification pipeline](docs/ANDROID_LOCAL_QUALIFICATION.md) — guarded WSL build, ADB, device tests and rollback; setup pending.
 - [Operational backlog](docs/EMERALD_EXTENDED_BACKLOG.md) — sixteen work items, priorities, dependencies and acceptance criteria. All sixteen tickets are open in [GitHub Issues](https://github.com/Proginji2000/emerald-android/issues), with priority and area labels.
 - [Upstream synchronization policy](docs/UPSTREAM_SYNC.md) — track both Cer0-D Android and ZallaxDev Emerald 3DS; integrate changes on qualification branches, not by automatic merges.
