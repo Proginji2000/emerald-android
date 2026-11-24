@@ -17,6 +17,39 @@ game on the top screen, and a touch interface on the bottom screen in place of
 the START menu. The optional **voxel overworld** lets you explore Hoenn from a
 new angle, rendered at the device's full resolution.
 
+## Emerald Extended — AYN Thor / French development fork
+
+This is an independent development fork of [Cer0-D/emerald-android](https://github.com/Cer0-D/emerald-android), based on v0.5.0.3. The goal is to extend the original Hoenn adventure with optional quality-of-life features while preserving the vanilla experience and save compatibility. The initial target is the AYN Thor and the French BPEF cartridge.
+
+**Development status — 24 November 2026:** the first local French Android development APK was built, signed and launched on the AYN Thor. Saving is currently a blocker. The latest runtime fixes are not yet qualified on the device. There is no new validated fork release to download.
+
+| Feature / milestone | Status |
+| :--- | :--- |
+| French Android development build, ROM loading and new game | Verified on AYN Thor (initial build) |
+| Independent battle speed and overworld speed | Verified on initial build; battle speed ×4 observed |
+| Battle speed adjustment using ZL/ZR | Source fix in PR #7; device retest pending |
+| Classic / progressive map, visited-city markers | Source fix in PR #7; device retest pending |
+| Save and imported-save compatibility | **Blocked:** save error and unreadable startup message under investigation |
+| Day/night cycle and timed encounters | Existing upstream features; current-build device qualification pending |
+| Trade evolutions without trading | Existing optional level-40 rule; French label improved, gameplay validation pending |
+| Dynamic PokéNav: encounters, seen/caught, items, gifts, trades and renewable resources | Planned extension of existing area encounter list |
+| Four seasons and seasonal effects | Research / design |
+| Expanded postgame: eight additional badge indicators and reinforced League | Design |
+
+### Development and progress
+
+- [Project roadmap](https://github.com/Proginji2000/emerald-android/blob/docs/emerald-extended-roadmap-20261122/docs/EMERALD_EXTENDED_ROADMAP.md) — scope, milestones, reuse research and acceptance criteria.
+- [Technical handoff](https://github.com/Proginji2000/emerald-android/blob/docs/emerald-extended-roadmap-20261122/docs/EMERALD_EXTENDED_HANDOFF_2026-11-22.md) — current state, reproducible procedures and next actions.
+- [French local build guide / PR #6](https://github.com/Proginji2000/emerald-android/pull/6) — isolated development APK, WSL2 and preflight checks.
+- [Runtime fixes / PR #7](https://github.com/Proginji2000/emerald-android/pull/7) and [AYN Thor QA report](https://github.com/Proginji2000/emerald-android/blob/fix/thor-runtime-feedback-20261123/docs/AYN_THOR_QA_2026-11-23.md) — observed defects and proposed fixes.
+- [GitHub Actions](https://github.com/Proginji2000/emerald-android/actions) — inspect actual CI results; 3DS and host CI are not Android hardware tests.
+
+**Safety:** the development APK uses `com.cer0.emerald.dev`; keep the official app `com.cer0.emerald` and its save/clock files intact. No ROM, personal save or locally generated APK is published here. Do not treat development branches as stable releases. Reuse existing implementations only after checking licence, provenance and compatibility.
+
+The documentation below describes the original Android port and its upstream features. It is retained for reference and attribution; it does not establish that every feature has been retested on this fork.
+
+---
+
 ## What's new in 0.5.0.3
 
 - **The top screen fits the display.** Its width follows the display's
@@ -53,8 +86,10 @@ faithfully as possible, plus a few extras.
 Everything happens inside the app: **no website, no desktop tool, no separate
 builder.**
 
-1. Download the latest APK from this repository's
-   [Releases](../../releases/latest) page and install it.
+1. For the original Android port, download the APK from the
+   [upstream Releases](https://github.com/Cer0-D/emerald-android/releases) page.
+   The Emerald Extended development fork has no newly validated release;
+   see its development links above.
 2. Put your **own clean, supported Pokémon Emerald ROM** somewhere on the
    device (see [supported cartridges](#supported-cartridges)).
 3. Open the app. On first launch it asks for the ROM: tap **Choose ROM** and
