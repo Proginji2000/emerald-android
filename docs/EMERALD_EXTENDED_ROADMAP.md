@@ -31,6 +31,7 @@ Les correctifs ASan des tests hôte utilisent des exécutables non-PIE sous Linu
 | P1 — carte | Aucun changement apparent avec mode progressif initial | PR #7 : marqueurs visités uniquement et compteur de villes, carte classique et Vol conservés ; test Thor à faire |
 | P1 — jour/nuit | Fonctionnel sur version antérieure selon utilisateur | Non retesté sur APK courant |
 | P1 — évolutions sans échange | Libellé corrigé dans PR #4, seuil 40 existant | Test en jeu restant |
+| P1-D — voxel 3D | PNJ sur chaises, plants de baies surélevés ; registre et qualification du rendu | À diagnostiquer |
 | P2 — PokéNav | Rencontres et taux existants, statut capturé et index objets/cadeaux/échanges à étendre | À développer |
 | P3 — saisons | Étude de réutilisation et compatibilité | À étudier |
 | P4 — Acte II | Deuxième campagne scénarisée, quêtes, nouveaux événements, huit badges supplémentaires et Ligue renforcée | À concevoir |
@@ -185,6 +186,32 @@ Les éléments marqués « existe » restent à valider sur le matériel cible. 
 - Aucune régression de la campagne initiale ni publication de données ROM privées.
 
 **STATUS : À CONCEVOIR.** Développement P4 après stabilisation sauvegarde/Android, PokéNav et travaux temporels ; ne pas prétendre que ces chapitres sont déjà implémentés.
+
+## Chantier P1-D — Qualification voxel 3D et corrections visuelles (24/11/2026)
+
+**Exigence utilisateur :** corriger progressivement les anomalies visuelles du mode voxel existant, sans réécrire le moteur. Ce chantier est transversal et prépare aussi les nouvelles cartes de l'Acte II.
+
+| ID | Anomalie rapportée sur AYN Thor | Hypothèses à vérifier | Critère d'acceptation |
+| --- | --- | --- | --- |
+| VOX-01 | PNJ debout sur les chaises au lieu de paraître assis | Ancrage vertical, position relative au siège, profondeur/occlusion, pose du sprite ou absence de pose assise | PNJ de chaises visés placés naturellement, sans traverser le mobilier ni modifier leur collision ou script |
+| VOX-02 | Plants de baies surélevés par rapport à la terre | Ancrage au sol, transparence/padding du sprite, hauteur de terrain ou support de modèle | Pied du plant au niveau de sa parcelle à tous les stades de croissance ; sol et comportement des baies préservés |
+
+Observations utilisateur ; emplacements exacts, captures, réglages et cause racine non encore établis. Ne pas supposer une correction unique ni modifier globalement la hauteur des sprites.
+
+**Sources internes vérifiées :**
+- `3ds_port/src/voxel/voxel_entities.c` : placement des sprites, padding des pieds, `ModelPush` et occlusion du mobilier, échantillonnage de relief, profondeur optionnelle des sprites.
+- `3ds_port/src/voxel/voxel_world.c`, `voxel_relief.c`, `voxel_building.c` : géométrie et supports.
+- `docs/VOXEL_GUIDE.md`, `docs/VOXEL_MOUNTAINS.md`, `docs/VOXEL_STATUS.md` : guides, couverture et limites connues ; le sol des baies doit rester un sol et ne pas être retouché comme relief.
+- `3ds_port/assets/voxel/relief_fixes.json`, scripts `gen_voxel_relief.py`, `voxel_scene.py`, `voxel_view_scan.py`, `voxel_relief_check.py` : réutiliser corrections par données et outils existants selon le cas, sans supposer que les outils de relief reproduisent à eux seuls les PNJ.
+
+**Méthode :**
+1. Relever carte/layout, cellule/objet, capture et paramètres caméra/profondeur ; comparer avec le mode 2D. Identifier si le PNJ est censé être assis et si son sprite possède une pose adaptée.
+2. Reproduire avec rendu déterministe ou fixture ciblée, isoler ancrage, support, pose et occlusion. Préférer une règle de placement correcte ou des métadonnées spécifiques à un décalage global.
+3. Ajouter des tests de non-régression (PNJ debout, assis, joueur, mobilier, baies à plusieurs stades, pentes et passages, ombres, caméra, profondeur 0/1/2/3 si disponible).
+4. Vérifier la compilation et le pipeline FR/recette/voxel, puis comparer avant/après sur Thor. Préserver mode 2D, collisions, scripts, croissance des baies et sauvegardes.
+5. Constituer un registre des anomalies voxel par carte/objet, dédupliquer les causes communes et traiter par lots. Réutiliser les outils du dépôt avant développement supplémentaire.
+
+**État :** à diagnostiquer. Aucun correctif voxel de ces deux anomalies livré ; la résolution du défaut SAVE reste prioritaire.
 
 ## 8. Références de réutilisation (à auditer, pas à copier automatiquement)
 
