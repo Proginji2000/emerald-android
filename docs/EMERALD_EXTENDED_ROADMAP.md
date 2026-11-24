@@ -5,6 +5,18 @@
 **Source :** fork `Proginji2000/emerald-android`, upstream `Cer0-D/emerald-android`, `main` au commit `ba8ca2671255d5b96c13d2b817e1721517299f90`.  
 **Principe :** expérience Pokémon Émeraude originale préservée ; modifications optionnelles autant que possible.
 
+## Reprise prioritaire — 24 novembre 2026, bible V0.3
+
+**STATUS : PARTIAL.** La conception est consolidée après l'échange vocal ; développement et qualification restent à faire. Les références sur main ci-dessous font autorité sur les instantanés V0.2 et antérieurs de ce document.
+
+- [Bible de conception V0.3](https://github.com/Proginji2000/emerald-android/blob/main/docs/EMERALD_EXTENDED_ACT2_DESIGN.md) : Acte I préservé, Acte II semi-linéaire de 20–25 h indicatives, 386 espèces Gen I–III, difficulté classique non punitive et paliers fixes après acceptation de Seko, huit badges supplémentaires, seconde Ligue, Deoxys, personnages et références aux œuvres Pokémon, Acte III terre/mer différé.
+- [Contrat de compatibilité et légalité](https://github.com/Proginji2000/emerald-android/blob/main/docs/EMERALD_EXTENDED_COMPATIBILITY.md) : format 128 Kio, structures Pokémon Gen III, preuves aller-retour avec ROM FR originale et PKHeX, aucune provenance inventée. Objectif 386 sans échange externe subordonné à légalité démontrée ; documenter les exceptions. Échanges PNJ définitifs, pas de restitution ni évolution par niveau en mode strict.
+- [Backlog opérationnel](https://github.com/Proginji2000/emerald-android/blob/main/docs/EMERALD_EXTENDED_BACKLOG.md) : 23 issues ouvertes, dont #29 compatibilité/PKHeX, #30 matrice des 386 espèces et #31 carnet d'aventure. [Qualification WSL / ADB / Thor](https://github.com/Proginji2000/emerald-android/blob/main/docs/ANDROID_LOCAL_QUALIFICATION.md).
+
+**Prochaine action :** sur le WSL déjà équipé, exécuter l'inventaire non destructif du guide de qualification, puis établir la connexion ADB avec la Thor et récupérer les journaux du défaut SAVE (#8) sur le package Dev uniquement. Préserver app et sauvegarde officielles. PR #7, commit `1d27ad64` : run 45270004191 toujours build-3ds FAIL après relance ; host-tests et audit PASS au dernier contrôle. Ne pas promouvoir ni présenter la CI ou les correctifs runtime comme validés. Ne pas réinstaller le SDK ni modifier la VM de l'orchestrateur en cours de qualification.
+
+**Travaux parallèles autorisés :** audit en lecture seule du pipeline maps/scripts/FR/voxel/audio (#21), matrice des méthodes légales (#30), conception détaillée du graphe et des personnages (#22). Pas de production massive de contenu avant qualification du pilote #23 et du contrat #29. Raccordement à la stack IA seulement après qualification de cette dernière et du transport distant. Les deux upstream restent suivis (#11) : Cer0-D main `ba8ca267`, ZallaxDev main `bcae4b70` lors du dernier contrôle. Main du fork contient des mises à jour documentaires, pas de fusion des PR moteur.
+
 ## Actualisation — 24 novembre 2026 (état courant, prioritaire sur les instantanés historiques)
 
 **STATUS : PARTIAL.** Le fork possède désormais un APK Android français de développement compilé localement et démarré sur AYN Thor. La sauvegarde reste bloquante. Aucun merge sur `main` (vérifié : `ba8ca267`).
