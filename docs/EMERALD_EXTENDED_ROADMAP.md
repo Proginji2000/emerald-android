@@ -33,7 +33,7 @@ Les correctifs ASan des tests hôte utilisent des exécutables non-PIE sous Linu
 | P1 — évolutions sans échange | Libellé corrigé dans PR #4, seuil 40 existant | Test en jeu restant |
 | P2 — PokéNav | Rencontres et taux existants, statut capturé et index objets/cadeaux/échanges à étendre | À développer |
 | P3 — saisons | Étude de réutilisation et compatibilité | À étudier |
-| P4 — postgame | Huit nouveaux indicateurs de badges et Ligue renforcée | À concevoir |
+| P4 — Acte II | Deuxième campagne scénarisée, quêtes, nouveaux événements, huit badges supplémentaires et Ligue renforcée | À concevoir |
 
 ### Reprise immédiate
 
@@ -69,7 +69,7 @@ Toutes les PR restent en brouillon ; `main` et l'application officielle doivent 
 | Carte progressive | **EN DÉVELOPPEMENT** dans PR #1 ; réutilisation des flags de villes visitées | Compiler, tester les icônes, la restauration du cache et le mode classique |
 | Quatre saisons | **NON CONFIRMÉES comme fonctionnalité existante** ; module proposé | Audit puis conception optionnelle |
 | Suivi objets/cadeaux/échanges | **NON IMPLÉMENTÉ comme inventaire dynamique de zone**, au vu des fonctions consultées | Concevoir index des sources, flags et cycles de réapparition |
-| Postgame à 8 nouveaux badges + nouvelle Ligue | **PROJET**, non développé | Scripts, équipes, nouveaux flags/badges et validation de progression |
+| Postgame narratif / Acte II | **PROJET**, non développé | Chapitres, missions hors combat, PNJ, dialogues, exploration, huit badges supplémentaires et Ligue renforcée |
 
 Les éléments marqués « existe » restent à valider sur le matériel cible. Un comportement du portage 3DS ne démontre pas automatiquement un test réussi sur Android.
 
@@ -147,14 +147,44 @@ Les éléments marqués « existe » restent à valider sur le matériel cible. 
 - Prévoir compatibilité voxels 3D, palettes 2D, baies, météo et sauvegarde ; concevoir test de rollback.
 - Ne pas promettre le fonctionnement des quatre saisons sans preuve de build et de test.
 
-## 7. Chantier P4 : extension de la campagne
+## 7. Chantier P4 : extension narrative de la campagne — Acte II
 
-- Recombats post-Ligue des huit champions avec nouvelles équipes, objets, IA et scénarios.
-- Ajouter huit **indicateurs de progression indépendants** des badges originaux. La représentation visuelle « 8 badges supplémentaires » peut nécessiter des assets/menus nouveaux.
-- Après obtention de ces huit indicateurs : accès à une Ligue renforcée, puis cycles optionnels de difficulté.
-- Réutiliser les tables de rematch et scripts déjà présents dans `pokeemerald` ; vérifier chaque compatibilité avant adaptation.
-- Conserver les badges de la première campagne, les HM et la progression originale.
-- Établir une matrice de migration des sauvegardes avant tout changement de flags/variables.
+**Exigence utilisateur (24/11/2026) :** le postgame doit être une véritable deuxième campagne, avec des éléments de scénario supplémentaires, pas seulement des combats ou huit nouveaux badges. L'intrigue ci-dessous est une piste de conception, non un scénario définitif ni une fonctionnalité livrée.
+
+### P4-A — Conception narrative
+
+- Déclencher l'Acte II après la première Ligue, sans modifier la campagne originale.
+- Définir une intrigue principale avec introduction, progression en chapitres, conflits, révélations et conclusion.
+- Propositions à étudier : retour à Bourg-en-Vol, anomalies climatiques à Hoenn, enquêtes autour des anciens membres des Teams Aqua/Magma, secrets de ruines et événements légendaires, dénouement avant ou autour de la Ligue renforcée.
+- Intégrer des personnages inédits, des dialogues conditionnels, des quêtes principales et secondaires, des missions d'enquête, d'exploration, de livraison ou de résolution d'énigmes, des récompenses et des événements évolutifs.
+- Faire évoluer certaines villes et certains PNJ en fonction des chapitres terminés. Étudier de nouvelles zones accessibles après la Ligue, selon la compatibilité du pipeline de cartes et du rendu Android/voxel.
+- Les huit nouveaux badges constituent des jalons narratifs et de progression ; associer chaque arène à une mission ou un événement plutôt que d'imposer uniquement des recombats.
+- Conserver les personnages et faits établis du jeu original ; écrire les nouveaux dialogues en français et prévoir leur localisation.
+
+### P4-B — Architecture et prototype vertical
+
+- Auditer d'abord les scripts d'événements, les flags/variables, les rematchs, les transitions de cartes, les callbacks et le PokéNav du moteur épinglé. Étudier les extensions existantes avant de créer un nouveau système de quêtes ; vérifier licence et provenance.
+- Définir le graphe des chapitres, les prérequis, les déclencheurs, les dialogues conditionnels, les récompenses et les états persistants. Prévoir des transitions rejouables sans récompenses dupliquées ni blocage.
+- Établir une matrice de compatibilité des sauvegardes avant tout nouveau flag/variable. Ne pas réutiliser d'identifiants occupés ni modifier arbitrairement la structure GBA. Évaluer une extension de persistance versionnée uniquement si nécessaire, avec restauration testée.
+- Construire un premier chapitre jouable de bout en bout : événement après Ligue, dialogue, objectif hors combat, modification d'état du monde, récompense unique, sauvegarde puis reprise.
+- Qualifier ce prototype sur Android FR / AYN Thor avant de développer les autres chapitres.
+
+### P4-C — Campagne complète et Ligue
+
+- Recombats scénarisés des huit champions avec nouvelles équipes, objets et IA.
+- Ajouter huit **indicateurs de progression indépendants** des badges originaux ; leur représentation visuelle peut nécessiter de nouveaux assets et menus.
+- Déverrouiller la Ligue renforcée selon l'avancement narratif et les jalons de progression ; proposer ensuite des cycles optionnels de difficulté.
+- Conserver les badges originaux, les HM, l'accès aux zones et la progression de la première campagne.
+
+### Critères de qualification P4
+
+- Une sauvegarde pré-Ligue reste utilisable et ne déclenche pas l'Acte II prématurément.
+- Une sauvegarde post-Ligue éligible permet de démarrer l'extension sans recommencer le jeu.
+- Au moins un objectif significatif hors combat existe dans chaque chapitre ; les dialogues et l'état du monde reflètent la progression réelle.
+- Sauvegarde/reprise au milieu des quêtes, récompenses non dupliquées, absence de blocage de progression, fonctionnement des nouveaux scripts et cartes sur AYN Thor.
+- Aucune régression de la campagne initiale ni publication de données ROM privées.
+
+**STATUS : À CONCEVOIR.** Développement P4 après stabilisation sauvegarde/Android, PokéNav et travaux temporels ; ne pas prétendre que ces chapitres sont déjà implémentés.
 
 ## 8. Références de réutilisation (à auditer, pas à copier automatiquement)
 
