@@ -40,6 +40,14 @@ L'utilisateur demande explicitement de prolonger le **scénario**, et non de lim
 
 L'utilisateur souhaite corriger le rendu voxel 3D existant. Premières anomalies : VOX-01 PNJ debout sur les chaises ; VOX-02 plants de baies surélevés par rapport au sol. Voir chantier P1-D de la roadmap. Réutiliser `voxel_entities.c` (ancrage des sprites, pieds, ModelPush, occlusion), le relief et les outils de validation existants. Localisation exacte/captures et cause racine à établir ; ne pas appliquer un décalage global. Préserver le mode 2D, collisions, scripts et croissance des baies. Aucun correctif de ces anomalies n'a encore été implémenté ni testé. Priorité SAVE maintenue.
 
+### Organisation opérationnelle et maintenance upstream — 24/11/2026
+
+Le [backlog opérationnel](https://github.com/Proginji2000/emerald-android/blob/main/docs/EMERALD_EXTENDED_BACKLOG.md) centralise 16 tickets préparés EE-001 à EE-016, priorités, dépendances et critères d'acceptation. Les Issues GitHub sont désactivées sur le fork (HTTP 410 lors de la tentative de création) : activer Settings → General → Features → Issues avant de créer les tickets ; rechercher les doublons, puis reporter les numéros réels. Aucun ticket GitHub n'est déclaré créé tant que l'API ne confirme pas l'opération.
+
+La [politique de synchronisation upstream](https://github.com/Proginji2000/emerald-android/blob/main/docs/UPSTREAM_SYNC.md) formalise le suivi conjoint de Cer0-D/emerald-android (parent direct, main/releases) et ZallaxDev/emerald-3ds (main/releases ; dev/integration en veille). Privilégier les mises à jour Android déjà portées, examiner les backports 3DS individuellement, intégrer sur branche dédiée et qualifier sans écraser les modifications locales ni la sauvegarde. Les SHA observés et les références de release sont consignés dans ce document. Ne pas confondre veille avec synchronisation réalisée.
+
+Les derniers changements de main sont documentaires (README, backlog et politique upstream), sans merge du moteur. Les PR #6/#7 restent des branches de développement.
+
 ### Reprise immédiate
 
 1. Lire [le rapport QA du 23/11](https://github.com/Proginji2000/emerald-android/blob/fix/thor-runtime-feedback-20261123/docs/AYN_THOR_QA_2026-11-23.md). Recontrôler le run PR #7 relancé, sans supposer sa réussite.
