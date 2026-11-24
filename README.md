@@ -31,7 +31,7 @@ This is an independent development fork of [Cer0-D/emerald-android](https://gith
 | Classic / progressive map, visited-city markers | Source fix in PR #7; device retest pending |
 | Save and imported-save compatibility | **Blocked:** save error and unreadable startup message under investigation |
 | Day/night cycle and timed encounters | Existing upstream features; current-build device qualification pending |
-| Trade evolutions without trading | Existing optional level-40 rule; French label improved, gameplay validation pending |
+| Trade evolutions without trading | Existing optional level-40 rule; strict Gen III mode to preserve original trade evolution and qualify NPC trades |
 | Dynamic PokéNav: encounters, seen/caught, items, gifts, trades and renewable resources | Planned extension of existing area encounter list |
 | Voxel 3D visual quality: seated NPCs, berry plant grounding and other placement defects | Investigation planned |
 | Four seasons and seasonal effects | Research / design |
@@ -41,10 +41,11 @@ The planned postgame is a narrative continuation of the original adventure, not 
 
 ### Development and progress
 
-- [Act II design — consolidated proposal](docs/EMERALD_EXTENDED_ACT2_DESIGN.md) — storyline, progression, Deoxys, second League and implementation gates.
+- [Design bible V0.3](docs/EMERALD_EXTENDED_ACT2_DESIGN.md) — approved design decisions, Act I/II, deferred Act III, Deoxys, second League and implementation gates.
+- [Save compatibility and Pokémon legality](docs/EMERALD_EXTENDED_COMPATIBILITY.md) — strict Gen III, PKHeX and bidirectional vanilla export/import; qualification pending.
 - [Vanilla level-design principles](docs/EMERALD_EXTENDED_LEVEL_DESIGN.md) — new routes, maps, characters and challenges must fit the original Hoenn style.
 - [Local Android qualification pipeline](docs/ANDROID_LOCAL_QUALIFICATION.md) — guarded WSL build, ADB, device tests and rollback; setup pending.
-- [Operational backlog](docs/EMERALD_EXTENDED_BACKLOG.md) — sixteen work items, priorities, dependencies and acceptance criteria. All sixteen tickets are open in [GitHub Issues](https://github.com/Proginji2000/emerald-android/issues), with priority and area labels.
+- [Operational backlog](docs/EMERALD_EXTENDED_BACKLOG.md) — 23 work items, priorities, dependencies and acceptance criteria. All 23 tickets are open in [GitHub Issues](https://github.com/Proginji2000/emerald-android/issues), with priority and area labels.
 - [Upstream synchronization policy](docs/UPSTREAM_SYNC.md) — track both Cer0-D Android and ZallaxDev Emerald 3DS; integrate changes on qualification branches, not by automatic merges.
 - [Project roadmap](https://github.com/Proginji2000/emerald-android/blob/docs/emerald-extended-roadmap-20261122/docs/EMERALD_EXTENDED_ROADMAP.md) — scope, milestones, reuse research and acceptance criteria.
 - [Technical handoff](https://github.com/Proginji2000/emerald-android/blob/docs/emerald-extended-roadmap-20261122/docs/EMERALD_EXTENDED_HANDOFF_2026-11-22.md) — current state, reproducible procedures and next actions.
