@@ -89,6 +89,8 @@ Audit des implémentations existantes, calendrier distinct de l'horloge, visuels
 
 ## P4 — Extension narrative et atelier multi-agents
 
+Référentiel commun : [Acte II — conception consolidée V0.2](EMERALD_EXTENDED_ACT2_DESIGN.md) et [charte de fidélité](EMERALD_EXTENDED_LEVEL_DESIGN.md). #24 est le parent d'intégration, pas un prérequis des sous-chantiers. Les propositions de scénario restent révisables.
+
 ### EE-013 — [P4-TOOLING] Atelier Codex / Claude
 **Issue :** [#21](https://github.com/Proginji2000/emerald-android/issues/21).
 Auditer Porymap, Poryscript et autres outils compatibles avec le moteur épinglé ; qualifier édition cartes/PNJ/équipes/scripts, allocations d'identifiants, validation, captures, build, relecture croisée. Tester adaptation des manifestes FR et recettes/ABI/voxel. Aucun outil installé/qualifié par cette issue seule.
@@ -101,13 +103,13 @@ Définir intrigue cohérente, chapitres, PNJ, dialogues, missions hors combat, �
 
 ### EE-015 — [P4-PILOT] Premier chapitre jouable
 **Issue :** [#23](https://github.com/Proginji2000/emerald-android/issues/23).
-Prototype vertical : déclenchement après Ligue, nouveau PNJ, dialogue, objectif hors combat, modification de carte/événement, récompense unique, sauvegarde/reprise. Réutiliser scripts/flags après audit ; pas de modification arbitraire du format GBA. 
+Prototype vertical : déclenchement après Ligue, nouvelle route, accès modifié, petit donjon, PNJ, dialogue, énigme, dresseurs, objectif hors combat, récompense unique, sauvegarde/reprise. Réutiliser scripts/flags après audit ; pas de modification arbitraire du format GBA. 
 **Acceptation :** build FR, Android, tests progression, rollback et Thor PASS ; avant Ligue inchangée. **Dépendances :** EE-001/002/013/014.
 
 ### EE-016 — [P4-CAMPAIGN] Campagne complète, badges et Ligue renforcée
 **Issue :** [#24](https://github.com/Proginji2000/emerald-android/issues/24).
 Déployer par chapitre après validation du pilote ; nouvelles cartes/PNJ/équipes/énigmes/événements ; huit badges indépendants et nouvelle Ligue. 
-**Acceptation :** chaque chapitre a un objectif hors combat, sauvegarde et reprise fiables, aucune régression de la campagne initiale, progression complète et conclusion. **Dépendances :** EE-015 et validation des systèmes requis.
+**Acceptation :** chaque chapitre a un objectif hors combat, sauvegarde et reprise fiables, aucune régression de la campagne initiale, progression complète et conclusion. **Dépendances :** EE-015/017/018/019/020 et validation des systèmes requis. Ticket parent d'intégration.
 
 ### EE-017 — [P4-WORLD] Hoenn évolutif : routes, circuits et connexions post-Ligue
 **Issue :** [#25](https://github.com/Proginji2000/emerald-android/issues/25).
@@ -122,7 +124,7 @@ Revoir les huit champions et **tous les dresseurs** de leurs arènes, équipes, 
 ### EE-019 — [P4-LEAGUE] Seconde Ligue scénarisée et dénouement de l'Acte II
 **Issue :** [#27](https://github.com/Proginji2000/emerald-android/issues/27).
 Refonte du Conseil 4 et du Maître, équipes, IA, décors et événements. Retournement narratif au dernier moment inspiré du principe de Noir et Blanc : possibilité de défaite du Maître face à l'antagoniste, crise et exploration au sein de la Ligue, objectifs hors combat, confrontation, résolution, épilogue et compétition régulière après la crise. Écrire un scénario original ; ne pas reproduire les dialogues ou l'intrigue de Noir et Blanc. Marc détrôné et Consortium Horizon sont des pistes provisoires.
-**Acceptation :** finale scénarisée et Ligue entièrement revues, reprise après défaite/sauvegarde, événements uniques sans duplication, Panthéon et première Ligue préservés. **Dépendances :** EE-013/014/015/016/017/018.
+**Acceptation :** finale scénarisée et Ligue entièrement revues, reprise après défaite/sauvegarde, événements uniques sans duplication, Panthéon et première Ligue préservés. **Dépendances :** EE-013/014/015/017/018/020 ; EE-016 est le parent.
 
 ### EE-020 — [P4-DEOXYS] Arc du Météore d'Aurore et événement Deoxys
 **Issue :** [#28](https://github.com/Proginji2000/emerald-android/issues/28).
