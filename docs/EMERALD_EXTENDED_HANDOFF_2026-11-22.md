@@ -2,6 +2,46 @@
 
 **Datation :** 2026-11-22, 18:26 (Europe/Paris). Cette fiche est un instantané ; recontrôler les états GitHub et CI au début de chaque reprise.
 
+## Actualisation — 24 novembre 2026 (état courant, prioritaire sur les instantanés historiques)
+
+**STATUS : PARTIAL.** Le fork possède désormais un APK Android français de développement compilé localement et démarré sur AYN Thor. La sauvegarde reste bloquante. Aucun merge sur `main` (vérifié : `ba8ca267`).
+
+### Références et preuves
+
+| Élément | Référence | État |
+| --- | --- | --- |
+| Base intégrée | `integration/ayn-thor-preview-20261122`, `a075c2c5` | CI 3DS PASS, run [45051243446](https://github.com/Proginji2000/emerald-android/actions/runs/45051243446) |
+| Précontrôle FR | [PR #6](https://github.com/Proginji2000/emerald-android/pull/6), `tooling/android-fr-preflight-20261122`, `0667b39` | CI PR [45263652888](https://github.com/Proginji2000/emerald-android/actions/runs/45263652888) SUCCESS ; run push 45263639208 FAILURE |
+| APK FR initial | `0667b39`, package `com.cer0.emerald.dev`, v0.5.0.3 | Compilation locale WSL2 PASS, signature APK v3 et package vérifiés ; installation et chargement ROM PASS sur Thor |
+| Correctifs runtime | [PR #7](https://github.com/Proginji2000/emerald-android/pull/7), `fix/thor-runtime-feedback-20261123`, `1d27ad64` | CI push [45269989952](https://github.com/Proginji2000/emerald-android/actions/runs/45269989952) SUCCESS ; CI PR [45270004191](https://github.com/Proginji2000/emerald-android/actions/runs/45270004191) FAILURE sur build-3ds, relance des jobs échoués demandée le 24/11. Cause non établie (logs indisponibles, états d'étapes incohérents). |
+| Code runtime avant ajout du rapport QA | `f6373bbc` | CI push 45269488061 et PR 45269556928 SUCCESS |
+
+Les correctifs ASan des tests hôte utilisent des exécutables non-PIE sous Linux, sans supprimer ASan/UBSan. Le précontrôle de la PR #6 détecte désormais le besoin de `python3-clang` du Python système. Le build Android local initial a abouti le 23/11 avec ROM FR validée. **Pas de nouvel APK compilé depuis la PR #7.**
+
+### État fonctionnel et priorités
+
+| Chantier | Observation / modification | Qualification |
+| --- | --- | --- |
+| P0 — APK FR / démarrage / commandes | Nouvelle partie jouable | PASS initial, pas validation exhaustive des deux écrans |
+| P0 — SAVE / import | Écran bleu avec texte illisible après tentative d'import officiel ; erreur de sauvegarde en nouvelle partie | FAIL ; permissions/format à diagnostiquer, aucun correctif prouvé |
+| P1 — vitesse | Vitesse générale et combat ×4 fonctionnent indépendamment ; gâchettes inefficaces pour régler le combat sur APK initial | PR #7 : ZL/ZR routés vers combat en scène active, sinon vitesse générale ; L/R existants conservés ; test Thor à faire |
+| P1 — carte | Aucun changement apparent avec mode progressif initial | PR #7 : marqueurs visités uniquement et compteur de villes, carte classique et Vol conservés ; test Thor à faire |
+| P1 — jour/nuit | Fonctionnel sur version antérieure selon utilisateur | Non retesté sur APK courant |
+| P1 — évolutions sans échange | Libellé corrigé dans PR #4, seuil 40 existant | Test en jeu restant |
+| P2 — PokéNav | Rencontres et taux existants, statut capturé et index objets/cadeaux/échanges à étendre | À développer |
+| P3 — saisons | Étude de réutilisation et compatibilité | À étudier |
+| P4 — postgame | Huit nouveaux indicateurs de badges et Ligue renforcée | À concevoir |
+
+### Reprise immédiate
+
+1. Lire [le rapport QA du 23/11](https://github.com/Proginji2000/emerald-android/blob/fix/thor-runtime-feedback-20261123/docs/AYN_THOR_QA_2026-11-23.md). Recontrôler le run PR #7 relancé, sans supposer sa réussite.
+2. Priorité absolue : diagnostic de sauvegarde Dev. Dans le dossier **Dev uniquement** `Android/data/com.cer0.emerald.dev/files/fr/sdmc/3ds/emerald3ds/`, conserver copie des `.sav`, `.sav.not-emerald*` et des fichiers horloge. Créer `debug.txt`, reproduire l'échec, lire les lignes pertinentes de `port.log`. Ne pas modifier les droits ou déplacer les fichiers originaux sans diagnostic. Un ancien incident EACCES/UID est une piste, pas une preuve de la cause actuelle.
+3. Qualifier le prochain APK local issu de PR #7 : récupérer la branche `fix/thor-runtime-feedback-20261123`, utiliser `VOXEL_LOCAL=1 bash android_port/tools/preflight_fr.sh --roms "$HOME/gba_roms" --build`. Contrôler signature et package `com.cer0.emerald.dev` avant installation. Aucun APK, ROM ou save privé ne doit être publié.
+4. Retester carte classique/progressive, compteur, gâchettes ZL/ZR et indépendance des vitesses, sauvegarde/reprise, import sans perte, horloge et jour/nuit.
+5. Après stabilité, reprendre PokéNav, saisons, postgame. Réutiliser les implémentations existantes seulement après audit de licence et de compatibilité.
+
+Toutes les PR restent en brouillon ; `main` et l'application officielle doivent rester intacts. Les sections datées ci-dessous sont conservées comme historique, et non comme état courant.
+
 ## 1. Dépôts, branches, règles
 
 - **Fork :** https://github.com/Proginji2000/emerald-android
