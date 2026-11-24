@@ -1,6 +1,8 @@
 # Emerald Extended — Backlog opérationnel
 
-Date de cadrage : 24 novembre 2026. **20 issues GitHub ouvertes et référencées ci-dessous.** Les identifiants EE restent stables ; les numéros # sont les tickets GitHub réels. Priorités P0 à P4 et labels de chantier. Chaque ticket doit relier ses PR, preuves CI et tests matériels ; aucun PASS sans preuve.
+Date de cadrage : 24 novembre 2026. **23 issues GitHub ouvertes et référencées ci-dessous.** Les identifiants EE restent stables ; les numéros # sont les tickets GitHub réels. Priorités P0 à P4 et labels de chantier. Chaque ticket doit relier ses PR, preuves CI et tests matériels ; aucun PASS sans preuve.
+
+Référentiels prioritaires : [bible V0.3](EMERALD_EXTENDED_ACT2_DESIGN.md) et [contrat compatibilité/légalité](EMERALD_EXTENDED_COMPATIBILITY.md). Les anciennes options incompatibles sont à revoir, pas à promouvoir.
 
 ## P0 — Base stable
 
@@ -28,6 +30,10 @@ Date de cadrage : 24 novembre 2026. **20 issues GitHub ouvertes et référencée
 - [ ] Tester FR, recettes, ABI, voxel, sauvegardes, licences et CI avant promotion.
 **Acceptation :** baseline, delta et preuves traçables ; jamais de merge automatique sur main.
 
+### EE-021 — [P0-COMPAT] Contrat de sauvegarde vanilla et légalité PKHeX
+**Issue :** [#29](https://github.com/Proginji2000/emerald-android/issues/29).
+Préserver format 128 Kio, données Gen III et provenance ; qualifier stockage complémentaire, export sûr, retour sur ROM originale et réimport, échanges et PKHeX versionné. Pas de falsification ni auto-légalisation. **Acceptation :** preuves aller-retour et invariants ; audit maintenant, qualification après EE-001/002. Bloque pilote et nouvelles obtentions.
+
 ## P1 — Corrections et fonctions existantes
 
 ### EE-004 — [P1-MAP] Carte classique/progressive
@@ -46,7 +52,7 @@ Date de cadrage : 24 novembre 2026. **20 issues GitHub ouvertes et référencée
 **Issue :** [#14](https://github.com/Proginji2000/emerald-android/issues/14).
 **État :** fonctions existantes ; validation du build courant à faire.
 - [ ] Jour/nuit, horloge, rencontres horaires Route 102, sauvegarde/reprise de l'horloge et baies.
-- [ ] Vérifier évolution sans échange niveau 40, avec/sans objet, libellé français.
+- [ ] Auditer option historique niveau 40, isoler/désactiver en mode strict ; préférer échanges PNJ définitifs conformes à Gen III (EE-021/022).
 **Acceptation :** tests Thor et absence de régression. **Dépendances :** EE-001/002.
 
 ### EE-007 — [P1-VOX-01] PNJ debout sur les chaises
@@ -80,16 +86,24 @@ Réutiliser la liste existante, afficher taux par méthode/heure, niveaux et sta
 Indexer les sources par carte, flags, conditions et réapparition ; états disponible/obtenu/renouvelé/verrouillé/inconnu. Objets cachés sans coordonnées précises. 
 **Acceptation :** grisage réel après collecte/reprise ; pas de faux statut ou duplication. **Dépendances :** EE-001/002/010.
 
+### EE-022 — [P2-COLLECTION] Matrice des 386 Pokémon et obtentions légales
+**Issue :** [#30](https://github.com/Proginji2000/emerald-android/issues/30).
+Inventorier 386 espèces, origines/méthodes officielles et blocages ; starters par quêtes, fossiles, échanges PNJ définitifs, légendaires et récompenses Pokédex. Légalité prioritaire ; aucune provenance inventée. **Acceptation :** 386/386 lignes documentées, solutions et exceptions explicites, tests des Pokémon réellement obtenus. Audit indépendant ; réalisation après EE-021.
+
+### EE-023 — [P2-JOURNAL] Carnet d'aventure PokéNav sans spoilers
+**Issue :** [#31](https://github.com/Proginji2000/emerald-android/issues/31).
+Quêtes visibles seulement après découverte naturelle ; objectif, indices, état et historique. **Acceptation :** invisible avant découverte, reprise correcte et FR/Thor. Conception après EE-014, réalisation après EE-021 ; coordination EE-004/010/011/015.
+
 ## P3 — Temps et saisons
 
 ### EE-012 — [P3-SEASONS] Saisons optionnelles
 **Issue :** [#20](https://github.com/Proginji2000/emerald-android/issues/20).
-Audit des implémentations existantes, calendrier distinct de l'horloge, visuels/météo/rencontres, cohérence des baies et voxel. Concevoir prototype avec sauvegarde et rollback avant extension.
+Audit des implémentations existantes ; une saison par mois réel, jour/nuit temps réel, réglage manuel heure/saison dans Voxel, auto/OFF, visuels/météo/rencontres, cohérence baies et voxel, légalité EE-021/022. Concevoir prototype avec sauvegarde et rollback avant extension.
 **Acceptation :** quatre saisons testées, aucune régression en mode OFF. **Dépendances :** EE-006/009/010.
 
 ## P4 — Extension narrative et atelier multi-agents
 
-Référentiel commun : [Acte II — conception consolidée V0.2](EMERALD_EXTENDED_ACT2_DESIGN.md) et [charte de fidélité](EMERALD_EXTENDED_LEVEL_DESIGN.md). #24 est le parent d'intégration, pas un prérequis des sous-chantiers. Les propositions de scénario restent révisables.
+Référentiel commun : [Bible de conception V0.3](EMERALD_EXTENDED_ACT2_DESIGN.md) et [charte de fidélité](EMERALD_EXTENDED_LEVEL_DESIGN.md). #24 est le parent d'intégration, pas un prérequis des sous-chantiers. Les propositions de scénario restent révisables.
 
 ### EE-013 — [P4-TOOLING] Atelier Codex / Claude
 **Issue :** [#21](https://github.com/Proginji2000/emerald-android/issues/21).
@@ -104,12 +118,12 @@ Définir intrigue cohérente, chapitres, PNJ, dialogues, missions hors combat, �
 ### EE-015 — [P4-PILOT] Premier chapitre jouable
 **Issue :** [#23](https://github.com/Proginji2000/emerald-android/issues/23).
 Prototype vertical : déclenchement après Ligue, nouvelle route, accès modifié, petit donjon, PNJ, dialogue, énigme, dresseurs, objectif hors combat, récompense unique, sauvegarde/reprise. Réutiliser scripts/flags après audit ; pas de modification arbitraire du format GBA. 
-**Acceptation :** build FR, Android, tests progression, rollback et Thor PASS ; avant Ligue inchangée. **Dépendances :** EE-001/002/013/014.
+**Acceptation :** build FR, Android, tests progression, rollback et Thor PASS ; avant Ligue inchangée. **Dépendances :** EE-001/002/013/014/021 ; coordination EE-022/023.
 
 ### EE-016 — [P4-CAMPAIGN] Campagne complète, badges et Ligue renforcée
 **Issue :** [#24](https://github.com/Proginji2000/emerald-android/issues/24).
 Déployer par chapitre après validation du pilote ; nouvelles cartes/PNJ/équipes/énigmes/événements ; huit badges indépendants et nouvelle Ligue. 
-**Acceptation :** chaque chapitre a un objectif hors combat, sauvegarde et reprise fiables, aucune régression de la campagne initiale, progression complète et conclusion. **Dépendances :** EE-015/017/018/019/020 et validation des systèmes requis. Ticket parent d'intégration.
+**Acceptation :** chaque chapitre a un objectif hors combat, sauvegarde et reprise fiables, aucune régression de la campagne initiale, progression complète et conclusion. **Dépendances :** EE-015/017/018/019/020/021/022/023 et validation des systèmes requis. Ticket parent d'intégration.
 
 ### EE-017 — [P4-WORLD] Hoenn évolutif : routes, circuits et connexions post-Ligue
 **Issue :** [#25](https://github.com/Proginji2000/emerald-android/issues/25).
@@ -128,7 +142,7 @@ Refonte du Conseil 4 et du Maître, équipes, IA, décors et événements. Retou
 
 ### EE-020 — [P4-DEOXYS] Arc du Météore d'Aurore et événement Deoxys
 **Issue :** [#28](https://github.com/Proginji2000/emerald-android/issues/28).
-Réinterprétation originale de l'Épisode Delta adaptée à Émeraude : Centre Spatial d'Algatia, Site Météore, Pilier Céleste, Île Aurore et Deoxys. Étudier un Ticket Aurore obtenu par progression, conserver l'énigme originale et intégrer l'arc au récit de l'Acte II. Vérifier les flags existants, les sauvegardes avec Rayquaza/Deoxys déjà capturés, les cas fuite/K.O. et la reprise ; aucune capture obligatoire, aucune duplication involontaire, pas de Méga-Évolution requise. Respecter la [charte de fidélité](EMERALD_EXTENDED_LEVEL_DESIGN.md).
+Réinterprétation originale de l'Épisode Delta adaptée à Émeraude : Centre Spatial d'Algatia, Site Météore, Pilier Céleste, Île Aurore et Deoxys. Étudier un Ticket Aurore obtenu par progression, conserver l'énigme originale et intégrer l'arc au récit de l'Acte II. Vérifier les flags existants, les sauvegardes avec Rayquaza/Deoxys déjà capturés, les cas fuite/K.O. et la reprise ; aucune capture obligatoire, aucune duplication involontaire, pas de Méga-Évolution requise. Respecter la [charte de fidélité](EMERALD_EXTENDED_LEVEL_DESIGN.md) et EE-021/022.
 **Acceptation :** arc original jouable et rencontre intégrée, événement vanilla préservé, progression sans blocage, FR/2D/voxel/Thor qualifiés. **Dépendances :** EE-013/014/015 ; coordination EE-016/017/019. Conception provisoire, non implémentée.
 
 ## Règles de gestion
