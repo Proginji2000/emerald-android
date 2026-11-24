@@ -38,7 +38,7 @@ Les correctifs ASan des tests hôte utilisent des exécutables non-PIE sous Linu
 
 ### Organisation opérationnelle et maintenance upstream — 24/11/2026
 
-Le [backlog opérationnel](https://github.com/Proginji2000/emerald-android/blob/main/docs/EMERALD_EXTENDED_BACKLOG.md) centralise 16 tickets préparés EE-001 à EE-016, priorités, dépendances et critères d'acceptation. Les Issues GitHub sont désactivées sur le fork (HTTP 410 lors de la tentative de création) : activer Settings → General → Features → Issues avant de créer les tickets ; rechercher les doublons, puis reporter les numéros réels. Aucun ticket GitHub n'est déclaré créé tant que l'API ne confirme pas l'opération.
+Le [backlog opérationnel](https://github.com/Proginji2000/emerald-android/blob/main/docs/EMERALD_EXTENDED_BACKLOG.md) centralise 16 tickets préparés EE-001 à EE-016, priorités, dépendances et critères d'acceptation. Les Issues GitHub sont désormais activées ; 16 tickets distincts ouverts, numéros réels et labels référencés dans le backlog. Le doublon #10 est fermé au profit de #9. Voir [Issues](https://github.com/Proginji2000/emerald-android/issues).
 
 La [politique de synchronisation upstream](https://github.com/Proginji2000/emerald-android/blob/main/docs/UPSTREAM_SYNC.md) formalise le suivi conjoint de Cer0-D/emerald-android (parent direct, main/releases) et ZallaxDev/emerald-3ds (main/releases ; dev/integration en veille). Privilégier les mises à jour Android déjà portées, examiner les backports 3DS individuellement, intégrer sur branche dédiée et qualifier sans écraser les modifications locales ni la sauvegarde. Les SHA observés et les références de release sont consignés dans ce document. Ne pas confondre veille avec synchronisation réalisée.
 
