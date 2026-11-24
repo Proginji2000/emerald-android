@@ -34,7 +34,9 @@ This is an independent development fork of [Cer0-D/emerald-android](https://gith
 | Trade evolutions without trading | Existing optional level-40 rule; French label improved, gameplay validation pending |
 | Dynamic PokéNav: encounters, seen/caught, items, gifts, trades and renewable resources | Planned extension of existing area encounter list |
 | Four seasons and seasonal effects | Research / design |
-| Expanded postgame: eight additional badge indicators and reinforced League | Design |
+| Expanded postgame — Act II: a second story campaign, new quests, characters, events, exploration, eight additional badge milestones and a reinforced League | Design |
+
+The planned postgame is a narrative continuation of the original adventure, not just a battle gauntlet. It will be designed around story chapters, main and side quests, non-combat objectives and evolving world events. The eight additional badge milestones support that story. This is a design goal, not a released feature.
 
 ### Development and progress
 
