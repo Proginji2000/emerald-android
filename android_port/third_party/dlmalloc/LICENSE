@@ -1,0 +1,22 @@
+# dlmalloc 2.8.6 — license and provenance
+
+**Author:** Doug Lea. **Version:** 2.8.6, dated 2012-08-29.
+
+The first lines of `malloc.c` state that Doug Lea released dlmalloc into
+the public domain and reference CC0 1.0:
+
+https://creativecommons.org/publicdomain/zero/1.0/
+
+The source included here is an unmodified copy of
+`libs/container/src/dlmalloc_2_8_6.c` from Boost.Container 1.92.0:
+
+https://github.com/boostorg/container/blob/boost-1.92.0/src/dlmalloc_2_8_6.c
+
+On 2026-11-22, the checked-in `malloc.c` was compared in full with the
+upstream source above; both UTF-8 texts were identical (221,525 characters).
+The code's own license declaration remains intact in `malloc.c`. This file
+records that declaration and source; it does not relicense the code under the
+port's `LICENSE-PORT.md`.
+
+**Role:** `android_port/src/android_lowmem.c` uses dlmalloc mspaces in a
+low-address heap on arm64. This is third-party code, not ROM/game artwork.
